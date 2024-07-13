@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&family=Fira+Code:wght@600&family=Poppins&family=Rubik+Lines&display=swap');
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 30px;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.poppins {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
