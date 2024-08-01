@@ -31,7 +31,7 @@ export default function Page() {
             <FaGithub className="text-[45px] rounded-[50px] p-2 hover:bg-[#8000ff]" />
           </Link> 
           <Link href="https://wa.me/917306573563">
-            <FaWhatsapp className="text-[45px] rounded-[50px] p-2 hover:bg-[#8000ff]" />
+            <FaWhatsapp className="text-[45px] rounded-[50px] p-2 hover:bg-[#8000ff]" /> 
           </Link>
         </div>
       </div>
