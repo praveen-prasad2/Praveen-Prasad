@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid visitor ID' }, { status: 400 });
     }
 
-    const analytics = registerVisitor(visitorId);
+    const analytics = await registerVisitor(visitorId);
 
     return NextResponse.json({ uniqueVisitors: analytics.uniqueVisitors });
   } catch (error) {
