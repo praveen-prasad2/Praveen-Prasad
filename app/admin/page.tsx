@@ -12,15 +12,41 @@ export default function AdminPanel() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [data, setData] = useState<PortfolioData | null>(null);
+  const [analytics, setAnalytics] = useState<{ uniqueVisitors: number } | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState<'about' | 'skills' | 'experiences' | 'projects'>('about');
   const [uploading, setUploading] = useState<string | null>(null); // Track which item is uploading
   const [logoutLoading, setLogoutLoading] = useState(false);
 
+  const loadAdminData = async () => {
+    setLoading(true);
+    try {
+      const [portfolioRes, analyticsRes] = await Promise.all([
+        fetch('/api/portfolio'),
+        fetch('/api/analytics/stats'),
+      ]);
+
+      const portfolioData = await portfolioRes.json();
+      const analyticsData = await analyticsRes.json();
+
+      setData(portfolioData);
+      if (analyticsData && typeof analyticsData.uniqueVisitors === 'number') {
+        setAnalytics({ uniqueVisitors: analyticsData.uniqueVisitors });
+      } else {
+        setAnalytics({ uniqueVisitors: 0 });
+      }
+    } catch (error) {
+      console.error('Error loading admin data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const resetState = () => {
     setAuthenticated(false);
     setData(null);
+    setAnalytics(null);
     setPassword('');
     setActiveTab('about');
     setLoading(false);
@@ -34,17 +60,7 @@ export default function AdminPanel() {
       .then((result) => {
         if (result.authenticated) {
           setAuthenticated(true);
-          // Load portfolio data
-          fetch('/api/portfolio')
-            .then((res) => res.json())
-            .then((data) => {
-              setData(data);
-              setLoading(false);
-            })
-            .catch((error) => {
-              console.error('Error fetching portfolio data:', error);
-              setLoading(false);
-            });
+          loadAdminData();
         } else {
           setAuthenticated(false);
         }
@@ -70,17 +86,7 @@ export default function AdminPanel() {
       
       if (result.success) {
         setAuthenticated(true);
-        // Load portfolio data after successful login
-        fetch('/api/portfolio')
-          .then((res) => res.json())
-          .then((data) => {
-            setData(data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error('Error fetching portfolio data:', error);
-            setLoading(false);
-          });
+        loadAdminData();
       } else {
         setLoginError(result.error || 'Invalid password');
       }
@@ -111,6 +117,7 @@ export default function AdminPanel() {
       setSaving(false);
     }
   };
+
 
   const handleLogout = async () => {
     setLogoutLoading(true);
@@ -408,7 +415,7 @@ export default function AdminPanel() {
               <p className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-3">
                 Snapshot
               </p>
-              <div className="grid grid-cols-3 gap-3 text-sm text-gray-700 dark:text-gray-300">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-gray-700 dark:text-gray-300">
                 <div>
                   <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Projects</p>
                   <p className="text-xl font-semibold text-gray-900 dark:text-white">{data.projects.length}</p>
@@ -420,6 +427,12 @@ export default function AdminPanel() {
                 <div>
                   <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Experience</p>
                   <p className="text-xl font-semibold text-gray-900 dark:text-white">{data.experiences.length}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">Unique Visitors</p>
+                  <p className="text-xl font-semibold text-gray-900 dark:text-white">
+                    {analytics?.uniqueVisitors ?? 0}
+                  </p>
                 </div>
               </div>
             </div>

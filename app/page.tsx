@@ -28,6 +28,32 @@ export default function Home() {
       });
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const storageKey = 'portfolio-visitor-id';
+    let visitorId = localStorage.getItem(storageKey);
+
+    if (!visitorId) {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        visitorId = crypto.randomUUID();
+      } else {
+        visitorId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+      }
+      localStorage.setItem(storageKey, visitorId);
+    }
+
+    fetch('/api/analytics/visit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ visitorId }),
+    }).catch((error) => {
+      console.error('Error registering visitor:', error);
+    });
+  }, []);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -49,7 +75,6 @@ export default function Home() {
       <NavigationBar />
       <main className="min-h-screen bg-white dark:bg-[#0a0a0a] px-4 pb-14 pt-24 md:px-8 md:pt-28">
         <div className="max-w-6xl mx-auto space-y-8">
-       
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[minmax(220px,auto)] grid-flow-dense">
           <AboutCard about={data.about} />
