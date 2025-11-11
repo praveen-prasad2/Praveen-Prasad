@@ -14,7 +14,8 @@
     "react-dom": "^18.2.0",
     "framer-motion": "^10.16.16",
     "lucide-react": "^0.329.0",
-    "@vercel/blob": "^0.21.0"
+    "@vercel/blob": "^0.21.0",
+    "@vercel/kv": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

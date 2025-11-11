@@ -15,6 +15,8 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const file = formData.get('file') as File;
     const type = formData.get('type') as string; // 'avatar' or 'skill-icon'
+    const blobToken =
+      process.env.BLOB_READ_WRITE_TOKEN || process.env.VERCEL_BLOB_READ_WRITE_TOKEN;
 
     if (!file) {
       return NextResponse.json(
@@ -41,6 +43,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!blobToken) {
+      console.error('Missing BLOB_READ_WRITE_TOKEN environment variable');
+      return NextResponse.json(
+        { error: 'File storage is not configured. Please set BLOB_READ_WRITE_TOKEN.' },
+        { status: 500 }
+      );
+    }
+
     // Generate unique filename
     const timestamp = Date.now();
     const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
@@ -50,6 +60,7 @@ export async function POST(request: NextRequest) {
       access: 'public',
       contentType: file.type,
       addRandomSuffix: true,
+      token: blobToken,
     });
 
     return NextResponse.json({

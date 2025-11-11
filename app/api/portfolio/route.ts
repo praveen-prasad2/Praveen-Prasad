@@ -4,7 +4,7 @@ import { PortfolioData } from '@/types/portfolio';
 
 export async function GET() {
   try {
-    const data = getPortfolioData();
+    const data = await getPortfolioData();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
@@ -26,9 +26,10 @@ export async function PUT(request: NextRequest) {
     }
 
     const data: PortfolioData = await request.json();
-    savePortfolioData(data);
+    await savePortfolioData(data);
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error('Error updating portfolio data:', error);
     return NextResponse.json(
       { error: 'Failed to update portfolio data' },
       { status: 500 }

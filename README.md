@@ -70,6 +70,18 @@ BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
 
 Set this token locally in `.env.local` as well if you want to test uploads outside production.
 
+#### Data Storage (Production)
+
+Portfolio content is stored in [Vercel KV](https://vercel.com/docs/storage/vercel-kv). After connecting a KV store to your project, add these environment variables:
+
+```
+KV_URL=<kv-connection-url>
+KV_REST_API_URL=<kv-rest-endpoint>
+KV_REST_API_TOKEN=<kv-rest-token>
+```
+
+You can find the values on the KV store page in the Vercel dashboard. Replicate them in `.env.local` for local editing/saving.
+
 ## Project Structure
 
 ```
