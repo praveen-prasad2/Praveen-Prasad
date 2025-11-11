@@ -3,7 +3,7 @@ import { getAnalyticsData } from '@/lib/analytics';
 
 export async function GET() {
   try {
-    const analytics = getAnalyticsData();
+    const analytics = await getAnalyticsData();
     return NextResponse.json({
       uniqueVisitors: analytics.uniqueVisitors,
       totalTrackedVisitors: analytics.visitorIds.length,
