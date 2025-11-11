@@ -1,0 +1,134 @@
+{
+  "about": {
+    "name": "Praveen Prasad",
+    "title": "Full Stack Developer",
+    "bio": "Passionate developer creating beautiful and functional web experiences.",
+    "email": "praveenprasad2510@gmail.com",
+    "location": "San Francisco, CA",
+    "avatar": "",
+    "socials": [
+      {
+        "id": "1",
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/example",
+        "handle": "@praveen",
+        "icon": "linkedin"
+      },
+      {
+        "id": "2",
+        "platform": "GitHub",
+        "url": "https://github.com/example",
+        "handle": "@praveen",
+        "icon": "github"
+      },
+      {
+        "id": "3",
+        "platform": "Twitter",
+        "url": "https://twitter.com/example",
+        "handle": "@praveen",
+        "icon": "twitter"
+      }
+    ]
+  },
+  "skills": [
+    {
+      "id": "1",
+      "name": "React",
+      "level": 90,
+      "category": "Frontend",
+      "icon": ""
+    },
+    {
+      "id": "2",
+      "name": "TypeScript",
+      "level": 85,
+      "category": "Language",
+      "icon": ""
+    },
+    {
+      "id": "3",
+      "name": "Next.js",
+      "level": 88,
+      "category": "Framework",
+      "icon": ""
+    },
+    {
+      "id": "4",
+      "name": "Node.js",
+      "level": 80,
+      "category": "Backend",
+      "icon": ""
+    },
+    {
+      "id": "5",
+      "name": "Tailwind CSS",
+      "level": 92,
+      "category": "Styling",
+      "icon": ""
+    }
+  ],
+  "experiences": [
+    {
+      "id": "1",
+      "title": "Senior Frontend Developer",
+      "company": "Tech Corp",
+      "period": "2022 - Present",
+      "description": "Leading frontend development initiatives and building scalable web applications.",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Next.js"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Full Stack Developer",
+      "company": "StartupXYZ",
+      "period": "2020 - 2022",
+      "description": "Developed and maintained full-stack applications using modern technologies.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "PostgreSQL"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "E-Commerce Platform",
+      "description": "A modern e-commerce platform with real-time inventory management.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Stripe"
+      ],
+      "link": "https://example.com",
+      "github": "https://github.com/example"
+    },
+    {
+      "id": "2",
+      "title": "Task Management App",
+      "description": "Collaborative task management application with real-time updates.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Socket.io"
+      ],
+      "link": "https://example.com",
+      "github": "https://github.com/example"
+    },
+    {
+      "id": "3",
+      "title": "Analytics Dashboard",
+      "description": "Beautiful analytics dashboard with interactive charts and data visualization.",
+      "technologies": [
+        "Next.js",
+        "D3.js",
+        "TypeScript"
+      ],
+      "link": "https://example.com",
+      "github": "https://github.com/example"
+    }
+  ]
+}
