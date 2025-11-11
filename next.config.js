@@ -2,7 +2,28 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost', 'images.unsplash.com', 'avatars.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'public.blob.vercel-storage.com',
+        pathname: '**',
+      },
+    ],
   },
 }
 

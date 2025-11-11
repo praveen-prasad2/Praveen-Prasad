@@ -36,14 +36,14 @@
       "name": "React",
       "level": 90,
       "category": "Frontend",
-      "icon": ""
+      "icon": "/uploads/skill-icon-1762854776801-react.png"
     },
     {
       "id": "2",
       "name": "TypeScript",
       "level": 85,
       "category": "Language",
-      "icon": ""
+      "icon": "/uploads/skill-icon-1762854786643-typescript.png"
     },
     {
       "id": "3",
@@ -57,7 +57,7 @@
       "name": "Node.js",
       "level": 80,
       "category": "Backend",
-      "icon": ""
+      "icon": "/uploads/skill-icon-1762854795105-nodejs.png"
     },
     {
       "id": "5",

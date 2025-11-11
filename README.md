@@ -60,6 +60,16 @@ Navigate to the home page to see your portfolio with the bento grid layout.
 ADMIN_PASSWORD=your-secure-password-here
 ```
 
+#### Image Uploads (Production)
+
+This project stores uploaded avatars and skill icons in [Vercel Blob Storage](https://vercel.com/docs/storage/vercel-blob). When deploying, add the following environment variable (and generate a token in the Vercel dashboard under Storage → Blob → Access Tokens):
+
+```
+BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
+```
+
+Set this token locally in `.env.local` as well if you want to test uploads outside production.
+
 ## Project Structure
 
 ```
