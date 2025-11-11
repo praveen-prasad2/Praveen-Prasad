@@ -41,15 +41,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
     // Generate unique filename
     const timestamp = Date.now();
     const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
     const filename = `${type}-${timestamp}-${originalName}`;
 
-    const blob = await put(`uploads/${filename}`, buffer, {
+    const blob = await put(`uploads/${filename}`, file, {
       access: 'public',
       contentType: file.type,
       addRandomSuffix: true,
