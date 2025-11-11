@@ -7,7 +7,7 @@ import {
   Instagram,
   Dribbble,
   Youtube,
-  BriefcaseBusiness,
+  Briefcase,
   ExternalLink,
 } from 'lucide-react';
 
@@ -19,7 +19,7 @@ export const SOCIAL_ICON_MAP: Record<string, LucideIcon> = {
   instagram: Instagram,
   dribbble: Dribbble,
   youtube: Youtube,
-  portfolio: BriefcaseBusiness,
+  portfolio: Briefcase,
   website: Globe,
   globe: Globe,
   link: ExternalLink,
