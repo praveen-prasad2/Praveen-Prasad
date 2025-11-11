@@ -10,12 +10,12 @@ interface SkillsCardProps {
 
 export default function SkillsCard({ skills }: SkillsCardProps) {
   return (
-    <BentoCard id="skills" className="md:col-span-2 lg:col-span-2 lg:row-span-2" delay={0.2}>
+    <BentoCard id="skills" className="md:col-span-2 lg:col-span-4 lg:row-span-2" delay={0.2}>
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Skills</h2>
         <span className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">Toolkit</span>
       </div>
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
         {skills.map((skill) => (
           <div
             key={skill.id}

@@ -53,7 +53,7 @@ export default function NavigationBar() {
             onClick={() => scrollToSection('about')}
             className="text-xl font-bold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
           >
-            Portfolio
+            Praveen.
           </button>
 
           {/* Desktop Navigation */}

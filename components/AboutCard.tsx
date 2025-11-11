@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import BentoCard from './BentoCard';
-import { About, SocialLink } from '@/types/portfolio';
-import Image from 'next/image';
-import Link from 'next/link';
-import { SOCIAL_ICON_MAP, getSocialIconKey } from '@/lib/socials';
+import BentoCard from "./BentoCard";
+import { About, SocialLink } from "@/types/portfolio";
+import Image from "next/image";
+import Link from "next/link";
+import { SOCIAL_ICON_MAP, getSocialIconKey } from "@/lib/socials";
 
 interface AboutCardProps {
   about: About;
@@ -18,7 +18,7 @@ export default function AboutCard({ about }: AboutCardProps) {
       delay={0.1}
     >
       <div className="absolute top-[-60px] right-[-20px] w-44 h-44 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl" />
-      <div className="relative z-10 space-y-5">
+      <div className="relative z-10 flex flex-col gap-4">
         {/* LinkedIn-style profile image */}
         <div className="flex items-start gap-4">
           {about.avatar ? (
@@ -39,7 +39,9 @@ export default function AboutCard({ about }: AboutCardProps) {
             </div>
           )}
           <div className="flex-1">
-            <h2 className="text-sm uppercase tracking-[0.35em] text-gray-500 dark:text-gray-400">About</h2>
+            <h2 className="text-sm uppercase tracking-[0.35em] text-gray-500 dark:text-gray-400">
+              About
+            </h2>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
               {about.name}
             </h1>
@@ -48,25 +50,25 @@ export default function AboutCard({ about }: AboutCardProps) {
             </p>
           </div>
         </div>
-        
+
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
           {about.bio}
         </p>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-3">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 px-3 py-2.5">
             <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Email</p>
             <p className="text-sm font-medium text-gray-800 dark:text-white break-words">{about.email}</p>
           </div>
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-3">
+          <div className="rounded-xl border border-gray-200 dark:border-gray-700 px-3 py-2.5">
             <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Location</p>
             <p className="text-sm font-medium text-gray-800 dark:text-white">{about.location}</p>
           </div>
         </div>
 
         {about.socials && about.socials.length > 0 && (
-          <div className="pt-3">
-            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-3">
+          <div className="pt-1">
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-2">
               Social
             </p>
             <div className="flex flex-wrap gap-2">
@@ -93,4 +95,3 @@ export default function AboutCard({ about }: AboutCardProps) {
     </BentoCard>
   );
 }
-
