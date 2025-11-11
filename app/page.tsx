@@ -1,56 +1,60 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { PortfolioData } from '@/types/portfolio';
-import AboutCard from '@/components/AboutCard';
-import SkillsCard from '@/components/SkillsCard';
-import ExperienceCard from '@/components/ExperienceCard';
-import ProjectsCard from '@/components/ProjectsCard';
-import BentoCard from '@/components/BentoCard';
-import HighlightsCard from '@/components/HighlightsCard';
-import ContactCard from '@/components/ContactCard';
-import NavigationBar from '@/components/NavigationBar';
+import { useEffect, useState } from "react";
+import { PortfolioData } from "@/types/portfolio";
+import AboutCard from "@/components/AboutCard";
+import SkillsCard from "@/components/SkillsCard";
+import ExperienceCard from "@/components/ExperienceCard";
+import ProjectsCard from "@/components/ProjectsCard";
+import BentoCard from "@/components/BentoCard";
+import HighlightsCard from "@/components/HighlightsCard";
+import ContactCard from "@/components/ContactCard";
+import NavigationBar from "@/components/NavigationBar";
 
 export default function Home() {
   const [data, setData] = useState<PortfolioData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/portfolio')
+    fetch("/api/portfolio")
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching portfolio data:', error);
+        console.error("Error fetching portfolio data:", error);
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const storageKey = 'portfolio-visitor-id';
+    const storageKey = "portfolio-visitor-id";
     let visitorId = localStorage.getItem(storageKey);
 
     if (!visitorId) {
-      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      if (
+        typeof crypto !== "undefined" &&
+        typeof crypto.randomUUID === "function"
+      ) {
         visitorId = crypto.randomUUID();
       } else {
-        visitorId = Math.random().toString(36).substring(2) + Date.now().toString(36);
+        visitorId =
+          Math.random().toString(36).substring(2) + Date.now().toString(36);
       }
       localStorage.setItem(storageKey, visitorId);
     }
 
-    fetch('/api/analytics/visit', {
-      method: 'POST',
+    fetch("/api/analytics/visit", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ visitorId }),
     }).catch((error) => {
-      console.error('Error registering visitor:', error);
+      console.error("Error registering visitor:", error);
     });
   }, []);
 
@@ -81,8 +85,11 @@ export default function Home() {
             <ExperienceCard experiences={data.experiences} />
 
             <SkillsCard skills={data.skills} />
-            <ProjectsCard projects={data.projects} contactEmail={data.about.email} />
-            {/* <HighlightsCard experiences={data.experiences} /> */}
+            <ProjectsCard
+              projects={data.projects}
+              contactEmail={data.about.email}
+            />
+
             <ContactCard
               email={data.about.email}
               location={data.about.location}
@@ -95,4 +102,3 @@ export default function Home() {
     </>
   );
 }
-

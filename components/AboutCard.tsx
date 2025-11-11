@@ -1,10 +1,8 @@
 "use client";
 
-import BentoCard from "./BentoCard";
-import { About, SocialLink } from "@/types/portfolio";
-import Image from "next/image";
-import Link from "next/link";
-import { SOCIAL_ICON_MAP, getSocialIconKey } from "@/lib/socials";
+import BentoCard from './BentoCard';
+import { About } from '@/types/portfolio';
+import Image from 'next/image';
 
 interface AboutCardProps {
   about: About;
@@ -14,11 +12,11 @@ export default function AboutCard({ about }: AboutCardProps) {
   return (
     <BentoCard
       id="about"
-      className="md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col justify-center relative overflow-hidden"
+      className="md:col-span-2 lg:col-span-2 flex flex-col justify-start relative overflow-hidden"
       delay={0.1}
     >
-      <div className="absolute top-[-60px] right-[-20px] w-44 h-44 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl" />
-      <div className="relative z-10 flex flex-col gap-4">
+      <div className="absolute top-[-80px] right-[-20px] w-56 h-56 bg-[radial-gradient(circle,_rgba(37,99,235,0.18),_transparent_65%)] rounded-full blur-3xl" />
+      <div className="relative z-10 flex flex-col gap-4 h-auto">
         {/* LinkedIn-style profile image */}
         <div className="flex items-start gap-4">
           {about.avatar ? (
@@ -54,43 +52,6 @@ export default function AboutCard({ about }: AboutCardProps) {
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
           {about.bio}
         </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 px-3 py-2.5">
-            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Email</p>
-            <p className="text-sm font-medium text-gray-800 dark:text-white break-words">{about.email}</p>
-          </div>
-          <div className="rounded-xl border border-gray-200 dark:border-gray-700 px-3 py-2.5">
-            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Location</p>
-            <p className="text-sm font-medium text-gray-800 dark:text-white">{about.location}</p>
-          </div>
-        </div>
-
-        {about.socials && about.socials.length > 0 && (
-          <div className="pt-1">
-            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500 mb-2">
-              Social
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {about.socials.map((social: SocialLink) => {
-                const iconKey = getSocialIconKey(social.platform, social.icon);
-                const Icon = SOCIAL_ICON_MAP[iconKey];
-                return (
-                  <Link
-                    key={social.id}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-primary-500 dark:hover:border-primary-500 transition-colors"
-                  >
-                    {Icon && <Icon className="h-4 w-4" />}
-                    <span>{social.platform}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </div>
     </BentoCard>
   );

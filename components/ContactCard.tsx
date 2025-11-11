@@ -14,7 +14,7 @@ interface ContactCardProps {
 
 export default function ContactCard({ email, location, name, socials }: ContactCardProps) {
   return (
-    <BentoCard id="contact" className="md:col-span-1 lg:col-span-2 flex flex-col justify-between" delay={0.22}>
+    <BentoCard id="contact" className="md:col-span-2 lg:col-span-4 flex flex-col justify-between" delay={0.22}>
       <div>
         <p className="uppercase text-xs tracking-[0.3em] text-primary-600 dark:text-primary-400">
           Collaborate

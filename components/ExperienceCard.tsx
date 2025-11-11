@@ -12,7 +12,9 @@ export default function ExperienceCard({ experiences }: ExperienceCardProps) {
     <BentoCard id="experience" className="md:col-span-2 lg:col-span-2" delay={0.3}>
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Experience</h2>
-        <span className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">Timeline</span>
+        <span className="text-xs uppercase tracking-[0.3em] text-gray-400 dark:text-gray-500">
+          Timeline
+        </span>
       </div>
       <div className="space-y-4">
         {experiences.map((exp) => (
