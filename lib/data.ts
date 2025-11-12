@@ -87,7 +87,9 @@ const readFromBlob = async (): Promise<PortfolioData> => {
 };
 
 const saveToBlob = async (data: PortfolioData): Promise<void> => {
-  if (!blobToken) return;
+  if (!blobToken) {
+    throw new Error('BLOB_READ_WRITE_TOKEN is not set. Please configure it in your Vercel environment variables.');
+  }
   try {
     await put(
       BLOB_PORTFOLIO_PATH,
@@ -99,6 +101,7 @@ const saveToBlob = async (data: PortfolioData): Promise<void> => {
         token: blobToken,
       }
     );
+    console.log('Successfully saved portfolio data to Blob at:', BLOB_PORTFOLIO_PATH);
   } catch (error) {
     console.error('Error saving portfolio data to blob:', error);
     throw error;
@@ -106,6 +109,17 @@ const saveToBlob = async (data: PortfolioData): Promise<void> => {
 };
 
 export async function getPortfolioData(): Promise<PortfolioData> {
+  // Prioritize Blob storage (for production)
+  if (hasBlobConfig) {
+    try {
+      return await readFromBlob();
+    } catch (error) {
+      console.error('Error reading from Blob, falling back:', error);
+      // Fall through to try other methods
+    }
+  }
+
+  // Fallback to KV if Blob is not available
   if (hasKvConfig) {
     try {
       const data = await kv.get<PortfolioData>(PORTFOLIO_KEY);
@@ -119,27 +133,42 @@ export async function getPortfolioData(): Promise<PortfolioData> {
     }
   }
 
-  if (hasBlobConfig) {
-    return readFromBlob();
-  }
-
+  // Final fallback to file (only works in development)
   return readFromFile();
 }
 
 export async function savePortfolioData(data: PortfolioData): Promise<void> {
-  if (hasKvConfig) {
+  // Prioritize Blob storage (for production)
+  if (hasBlobConfig) {
     try {
-      await kv.set(PORTFOLIO_KEY, data);
+      await saveToBlob(data);
+      console.log('Portfolio data saved to Blob successfully');
       return;
     } catch (error) {
-      console.error('Error saving portfolio data to KV:', error);
+      console.error('Error saving to Blob:', error);
+      throw new Error(`Failed to save to Blob storage: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
-  if (hasBlobConfig) {
-    await saveToBlob(data);
-    return;
+  // Fallback to KV if Blob is not available
+  if (hasKvConfig) {
+    try {
+      await kv.set(PORTFOLIO_KEY, data);
+      console.log('Portfolio data saved to KV successfully');
+      return;
+    } catch (error) {
+      console.error('Error saving portfolio data to KV:', error);
+      throw new Error(`Failed to save to KV storage: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
   }
 
-  await saveToFile(data);
+  // Final fallback to file (only works in development)
+  try {
+    await saveToFile(data);
+    console.log('Portfolio data saved to file successfully');
+  } catch (error) {
+    console.error('Error saving to file:', error);
+    throw new Error(`Failed to save to file storage: ${error instanceof Error ? error.message : 'Unknown error'}. This likely means BLOB_READ_WRITE_TOKEN is not set in production.`);
+  }
 }
+

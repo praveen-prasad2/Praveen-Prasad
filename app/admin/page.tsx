@@ -104,15 +104,20 @@ export default function AdminPanel() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
+      
+      const result = await response.json();
+      
       if (response.ok) {
         alert('Portfolio data saved successfully!');
         router.push('/');
       } else {
-        alert('Failed to save portfolio data');
+        const errorMsg = result.error || 'Failed to save portfolio data';
+        console.error('Save error:', result);
+        alert(`Error: ${errorMsg}\n\nPlease check that BLOB_READ_WRITE_TOKEN is set in your Vercel environment variables.`);
       }
     } catch (error) {
       console.error('Error saving data:', error);
-      alert('Failed to save portfolio data');
+      alert(`Failed to save portfolio data: ${error instanceof Error ? error.message : 'Unknown error'}\n\nPlease check your Vercel environment variables.`);
     } finally {
       setSaving(false);
     }

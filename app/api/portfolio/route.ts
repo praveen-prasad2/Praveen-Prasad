@@ -30,8 +30,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error updating portfolio data:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to update portfolio data';
     return NextResponse.json(
-      { error: 'Failed to update portfolio data' },
+      { error: errorMessage, details: error instanceof Error ? error.stack : undefined },
       { status: 500 }
     );
   }
