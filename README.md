@@ -1,18 +1,15 @@
 # Portfolio Website - Bento Grid Design
 
-A modern, single-page portfolio website with a bento grid layout, built with Next.js, TypeScript, and Tailwind CSS. Features a fully customizable admin panel for managing portfolio content.
+A modern, single-page portfolio website with a bento grid layout, built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
 - 🎨 **Bento Grid Design** - Modern, responsive grid layout with green/white theme
 - 📱 **Fully Responsive** - Works on all device sizes
 - 🎭 **Dark Mode Support** - Automatic dark mode based on system preferences
-- ⚡ **Protected Admin Panel** - Password-protected admin panel for editing portfolio content
-- 🔒 **Logout Support** - Securely end admin sessions directly in the dashboard
 - 🎬 **Minimal Animations** - Smooth, subtle animations using Framer Motion
 - 🔧 **TypeScript** - Fully typed for better development experience
 - 🎨 **Modern Typography** - Urbanist font for a clean, professional look
-- 🖼️ **Image Uploads** - Manage profile photos and skill icons directly from the admin panel
 
 ## Getting Started
 
@@ -41,53 +38,14 @@ npm run dev
 
 Navigate to the home page to see your portfolio with the bento grid layout.
 
-### Admin Panel
+### Editing Content
 
-1. Navigate to `/admin` in your browser
-2. Enter the admin password (default: `admin123`, or set `ADMIN_PASSWORD` in `.env.local`)
-3. Use the tabs to switch between different sections:
-   - **About**: Edit your personal information
-   - **Skills**: Add, edit, or remove skills with proficiency levels
-   - **Experiences**: Manage your work experience
-   - **Projects**: Add and edit your projects
-4. Upload a profile photo or skill icons (PNG, SVG, JPEG)
-5. Click "Save Changes" to persist your updates
-6. Use the "Logout" button to end the admin session
-7. Changes will be reflected immediately on the portfolio page
-
-**Note**: The admin panel is password-protected. Set a secure password by creating a `.env.local` file with:
-```
-ADMIN_PASSWORD=your-secure-password-here
-```
-
-#### Image Uploads (Production)
-
-This project stores uploaded avatars and skill icons in [Vercel Blob Storage](https://vercel.com/docs/storage/vercel-blob). When deploying, add the following environment variable (and generate a token in the Vercel dashboard under Storage → Blob → Access Tokens):
-
-```
-BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
-```
-
-Set this token locally in `.env.local` as well if you want to test uploads outside production.
-
-#### Data Storage (Production)
-
-Portfolio content is stored in [Vercel KV](https://vercel.com/docs/storage/vercel-kv). After connecting a KV store to your project, add these environment variables:
-
-```
-KV_URL=<kv-connection-url>
-KV_REST_API_URL=<kv-rest-endpoint>
-KV_REST_API_TOKEN=<kv-rest-token>
-```
-
-You can find the values on the KV store page in the Vercel dashboard. Replicate them in `.env.local` for local editing/saving.
+All portfolio data lives in `data/portfolio.json`. Update this file to change the About, Skills, Experience, Projects, or Contact information displayed on the site.
 
 ## Project Structure
 
 ```
 ├── app/
-│   ├── admin/          # Admin panel page
-│   ├── api/            # API routes for data management
 │   ├── globals.css     # Global styles
 │   ├── layout.tsx      # Root layout
 │   └── page.tsx        # Portfolio home page
@@ -99,8 +57,6 @@ You can find the values on the KV store page in the Vercel dashboard. Replicate 
 │   └── SkillsCard.tsx
 ├── data/               # JSON data storage
 │   └── portfolio.json
-├── lib/                # Utility functions
-│   └── data.ts
 └── types/              # TypeScript type definitions
     └── portfolio.ts
 ```
@@ -115,9 +71,9 @@ The project uses Tailwind CSS. Modify `tailwind.config.ts` to customize colors, 
 
 Animations are handled by Framer Motion. Adjust animation parameters in `components/BentoCard.tsx` for different effects.
 
-### Data Storage
+### Content
 
-Currently, data is stored in `data/portfolio.json`. For production, consider migrating to a database or headless CMS.
+Update `data/portfolio.json` to manage the static content shown on the site.
 
 ## Build for Production
 
