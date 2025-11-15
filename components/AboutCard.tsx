@@ -25,31 +25,31 @@ export default function AboutCard({ about }: AboutCardProps) {
                 src={about.avatar}
                 alt={about.name}
                 fill
-                className="object-cover rounded-full border-4 border-white dark:border-gray-800 shadow-lg"
+                className="object-cover rounded-full border-4 border-white shadow-lg"
                 sizes="96px"
               />
             </div>
           ) : (
-            <div className="w-24 h-24 flex-shrink-0 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-800 shadow-lg">
+            <div className="w-24 h-24 flex-shrink-0 bg-gray-200 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
               <span className="text-2xl font-bold text-gray-400">
                 {about.name.charAt(0).toUpperCase()}
               </span>
             </div>
           )}
           <div className="flex-1">
-            <h2 className="text-sm uppercase tracking-[0.35em] text-gray-500 dark:text-gray-400">
+            <h2 className="text-sm uppercase tracking-[0.35em] text-gray-500">
               About
             </h2>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
               {about.name}
             </h1>
-            <p className="text-lg text-primary-600 dark:text-primary-400 font-medium mt-2">
+            <p className="text-lg text-primary-600 font-medium mt-2">
               {about.title}
             </p>
           </div>
         </div>
 
-        <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-sm md:text-base">
+        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
           {about.bio}
         </p>
       </div>
