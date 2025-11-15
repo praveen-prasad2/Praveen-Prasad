@@ -37,4 +37,7 @@ next-env.d.ts
 # uploaded files (keep directory structure)
 public/uploads/*
 !public/uploads/.gitkeep
+# Allow skill icons to be tracked
+!public/uploads/*.svg
+!public/uploads/*.png
 
