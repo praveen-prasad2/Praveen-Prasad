@@ -2,7 +2,7 @@
   "about": {
     "name": "Praveen Prasad",
     "title": "Full Stack Developer",
-    "bio": "Passionate developer creating beautiful and functional web experiences.",
+    "bio": "Dedicated full-stack web developer with strong skills in Next.js, React, TypeScript, Node.js, WordPress, and automation tools like n8n. Self-driven and committed to continuous learning, I combine technical expertise with strong leadership qualities to build scalable applications, guide teams, and deliver clean, user-focused solutions.",
     "email": "praveenprasad2510@gmail.com",
     "location": "Malappuram,Kerala",
     "avatar": "",
@@ -10,118 +10,206 @@
       {
         "id": "1",
         "platform": "LinkedIn",
-        "url": "https://www.linkedin.com/in/example",
-        "handle": "@praveen",
+        "url": "https://www.linkedin.com/in/praveen-prasad-14764b231/",
+        "handle": "",
         "icon": "linkedin"
       },
       {
         "id": "2",
         "platform": "GitHub",
-        "url": "https://github.com/example",
-        "handle": "@praveen",
+        "url": "https://github.com/praveen-prasad2",
+        "handle": "@praveen-prasad2",
         "icon": "github"
       },
       {
         "id": "3",
-        "platform": "Twitter",
-        "url": "https://twitter.com/example",
-        "handle": "@praveen",
-        "icon": "twitter"
+        "platform": "X",
+        "url": "https://x.com/praveen_prasaad",
+        "handle": "@praveen_prasaad",
+        "icon": "x"
+      },
+      {
+        "id": "4",
+        "platform": "Instagram",
+        "url": "https://www.instagram.com/praveen_prasaad/",
+        "handle": "@praveen_prasaad",
+        "icon": "instagram"
       }
     ]
   },
   "skills": [
     {
       "id": "1",
-      "name": "React",
+      "name": "Next.js",
       "level": 90,
       "category": "Frontend",
-      "icon": "/uploads/skill-icon-1762854776801-react.png"
+      "icon": "/uploads/nextjs.svg"
     },
     {
       "id": "2",
       "name": "TypeScript",
       "level": 85,
       "category": "Language",
-      "icon": "/uploads/skill-icon-1762854786643-typescript.png"
+      "icon": "/uploads/typescript.svg"
+    },
+    {
+      "id": "3",
+      "name": "JavaScript",
+      "level": 88,
+      "category": "Language",
+      "icon": "/uploads/js.svg"
     },
     {
       "id": "4",
-      "name": "Node.js",
-      "level": 80,
-      "category": "Backend",
-      "icon": "/uploads/skill-icon-1762854795105-nodejs.png"
+      "name": "Tailwind CSS",
+      "level": 92,
+      "category": "Frontend",
+      "icon": "/uploads/tailwind.png"
     },
     {
       "id": "5",
-      "name": "Tailwind CSS",
-      "level": 92,
-      "category": "Styling",
-      "icon": ""
+      "name": "React",
+      "level": 90,
+      "category": "Frontend",
+      "icon": "/uploads/react.svg"
+    },
+    {
+      "id": "6",
+      "name": "Node.js",
+      "level": 85,
+      "category": "Backend",
+      "icon": "/uploads/nodejs.svg"
+    },
+    {
+      "id": "7",
+      "name": "Express.js",
+      "level": 80,
+      "category": "Backend",
+      "icon": "/uploads/express.svg"
+    },
+    {
+      "id": "8",
+      "name": "MongoDB",
+      "level": 75,
+      "category": "Database",
+      "icon": "/uploads/mongodb.png"
+    },
+    {
+      "id": "9",
+      "name": "Git",
+      "level": 85,
+      "category": "Tools",
+      "icon": "/uploads/git.svg"
+    },
+    {
+      "id": "10",
+      "name": "WordPress",
+      "level": 80,
+      "category": "CMS",
+      "icon": "/uploads/wordpress.svg"
+    },
+    {
+      "id": "11",
+      "name": "Shopify",
+      "level": 75,
+      "category": "E-commerce",
+      "icon": "/uploads/shopify.svg"
+    },
+    {
+      "id": "12",
+      "name": "Figma",
+      "level": 70,
+      "category": "Design",
+      "icon": "/uploads/figma.svg"
+    },
+    {
+      "id": "13",
+      "name": "GSAP",
+      "level": 75,
+      "category": "Frontend",
+      "icon": "/uploads/gsap.png"
+    },
+    {
+      "id": "14",
+      "name": "N8N",
+      "level": 80,
+      "category": "Automation",
+      "icon": "/uploads/n8n.png"
+    },
+    {
+      "id": "15",
+      "name": "Docker",
+      "level": 70,
+      "category": "DevOps",
+      "icon": "/uploads/docker.svg"
+    },
+    {
+      "id": "16",
+      "name": "Cursor",
+      "level": 85,
+      "category": "Tools",
+      "icon": "/uploads/cursor.png"
+    },
+    {
+      "id": "17",
+      "name": "Windsurf",
+      "level": 80,
+      "category": "Tools",
+      "icon": "/uploads/windsurf.png"
+    },
+    {
+      "id": "18",
+      "name": "AWS",
+      "level": 75,
+      "category": "Cloud",
+      "icon": "/uploads/aws.png"
     }
   ],
   "experiences": [
     {
       "id": "1",
       "title": "Senior Frontend Developer",
-      "company": "Tech Corp",
-      "period": "2022 - Present",
-      "description": "Leading frontend development initiatives and building scalable web applications.",
-      "technologies": [
-        "React",
-        "TypeScript",
-        "Next.js"
-      ]
+      "company": "Beegains Technology Solutions LLP,Malappuram",
+      "period": "Oct 2024 - Present",
+      "description": "Built modern, scalable web applications using Next.js and TypeScript (self-learned). I also worked on full-stack features and created workflow automations using n8n (self-learned).",
+      "technologies": ["Next.js", "TypeScript", "n8n", "Docker"]
     },
     {
       "id": "2",
-      "title": "Full Stack Developer",
-      "company": "StartupXYZ",
-      "period": "2020 - 2022",
-      "description": "Developed and maintained full-stack applications using modern technologies.",
-      "technologies": [
-        "React",
-        "Node.js",
-        "PostgreSQL"
-      ]
+      "title": "Web Developer",
+      "company": "Chimera, Trivandrum",
+      "period": "June 2023 - Oct 2024",
+      "description": "Worked on building responsive, user-focused web solutions using React, Node.js, and WordPress. I contributed to both frontend and backend features, delivering efficient and scalable project implementations.",
+      "technologies": ["React", "Node.js", "MongoDB", "WordPress"]
     }
   ],
   "projects": [
     {
       "id": "1",
-      "title": "E-Commerce Platform",
-      "description": "A modern e-commerce platform with real-time inventory management.",
+      "title": "Product Share",
+      "description": "Product Share is a simple SaaS platform that helps small entrepreneurs quickly create and share professional product catalogues.",
       "technologies": [
         "Next.js",
         "TypeScript",
-        "Stripe"
+        "Razorpay",
+        "Tailwind CSS",
+        "AWS S3"
       ],
-      "link": "https://example.com",
-      "github": "https://github.com/example"
+      "link": "https://www.productshare.in/"
     },
     {
       "id": "2",
-      "title": "Task Management App",
-      "description": "Collaborative task management application with real-time updates.",
-      "technologies": [
-        "React",
-        "Node.js",
-        "Socket.io"
-      ],
-      "link": "https://example.com",
-      "github": "https://github.com/example"
+      "title": "Beegains Academy",
+      "description": "Beegains Academy is a modern website with a clean, engaging interface. It includes a backend admin dashboard for easy content and user management.",
+      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB"],
+      "link": "https://beegainsacademy.com/"
     },
     {
       "id": "3",
-      "title": "Analytics Dashboard",
-      "description": "Beautiful analytics dashboard with interactive charts and data visualization.",
-      "technologies": [
-        "Next.js",
-        "D3.js",
-        "TypeScript"
-      ],
-      "link": "https://example.com",
-      "github": "https://github.com/example"
+      "title": "Rheinland Consultancy",
+      "description": "Rheinland Consultancy is a Germany-based service that helps candidates in India find and apply for overseas job opportunities. It offers a simple and reliable pathway to global careers.",
+      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB"],
+      "link": "https://rheinlandconsultancy.com/"
     }
   ]
 }

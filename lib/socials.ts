@@ -1,8 +1,8 @@
 import type { LucideIcon } from 'lucide-react';
+import type { ComponentType } from 'react';
 import {
   Linkedin,
   Github,
-  Twitter,
   Globe,
   Instagram,
   Dribbble,
@@ -10,12 +10,13 @@ import {
   Briefcase,
   ExternalLink,
 } from 'lucide-react';
+import XIcon from '@/components/XIcon';
 
-export const SOCIAL_ICON_MAP: Record<string, LucideIcon> = {
+export const SOCIAL_ICON_MAP: Record<string, LucideIcon | ComponentType<{ className?: string }>> = {
   linkedin: Linkedin,
   github: Github,
-  twitter: Twitter,
-  x: Twitter,
+  twitter: XIcon,
+  x: XIcon,
   instagram: Instagram,
   dribbble: Dribbble,
   youtube: Youtube,
@@ -28,7 +29,7 @@ export const SOCIAL_ICON_MAP: Record<string, LucideIcon> = {
 export const SOCIAL_ICON_OPTIONS: Array<{ label: string; value: string }> = [
   { label: 'LinkedIn', value: 'linkedin' },
   { label: 'GitHub', value: 'github' },
-  { label: 'Twitter / X', value: 'twitter' },
+  { label: 'X', value: 'twitter' },
   { label: 'Instagram', value: 'instagram' },
   { label: 'Dribbble', value: 'dribbble' },
   { label: 'YouTube', value: 'youtube' },
