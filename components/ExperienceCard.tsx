@@ -23,12 +23,24 @@ export default function ExperienceCard({ experiences }: ExperienceCardProps) {
       let totalMs = 0;
 
       experiences.forEach((exp) => {
-        const [startStr, endStr] = exp.period.split(' - ');
-        const start = new Date(startStr);
-        const end = endStr?.toLowerCase().trim() === 'present' ? new Date() : new Date(endStr);
+        const parts = exp.period.split(' - ');
+        if (parts.length < 2) return;
+        
+        const startStr = parts[0].trim();
+        const endStr = parts[1].trim();
+        
+        // Handle "Month Year" format more robustly
+        const parseDate = (dateStr: string) => {
+          if (dateStr.toLowerCase() === 'present') return new Date();
+          // Add a day to help parsing if needed, though modern JS handles "Oct 2024"
+          return new Date(dateStr);
+        };
+
+        const start = parseDate(startStr);
+        const end = parseDate(endStr);
         
         if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
-          totalMs += end.getTime() - start.getTime();
+          totalMs += Math.max(0, end.getTime() - start.getTime());
         }
       });
 
@@ -50,17 +62,17 @@ export default function ExperienceCard({ experiences }: ExperienceCardProps) {
 
   return (
     <BentoCard id="experience" className="md:col-span-2 lg:col-span-4" delay={0.3}>
-      <div className="flex flex-col mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-2xl font-bold text-white tracking-tight">Experience</h2>
-          <span className="text-[10px] uppercase tracking-[0.4em] text-white/40">
+      <div className="flex flex-col mb-6 md:mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">Experience</h2>
+          <span className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] text-white/40">
             Career Path
           </span>
         </div>
         
         {/* Total Experience Counter */}
-        <div className="mt-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold mb-3 text-center">
+        <div className="p-3 md:p-4 rounded-2xl bg-white/[0.03] border border-white/5 shadow-inner">
+          <p className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold mb-3 text-center">
             Total Professional Experience
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -72,11 +84,11 @@ export default function ExperienceCard({ experiences }: ExperienceCardProps) {
               { label: 'Min', value: totalExperience.minutes },
               { label: 'Sec', value: totalExperience.seconds }
             ].map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/5 border border-white/5 group hover:border-blue-500/30 transition-all">
-                <span className="text-xl font-black text-white group-hover:text-blue-400 transition-colors tabular-nums">
+              <div key={idx} className="flex flex-col items-center justify-center py-2 rounded-xl bg-white/5 border border-white/5 group hover:border-blue-500/30 transition-all">
+                <span className="text-base md:text-xl font-black text-white group-hover:text-blue-400 transition-colors tabular-nums leading-none mb-1">
                   {item.value.toString().padStart(2, '0')}
                 </span>
-                <span className="text-[8px] uppercase tracking-tighter text-white/30 font-bold">
+                <span className="text-[7px] md:text-[8px] uppercase tracking-tighter text-white/30 font-bold leading-none">
                   {item.label}
                 </span>
               </div>
