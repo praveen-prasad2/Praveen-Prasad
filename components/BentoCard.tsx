@@ -1,26 +1,56 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SpotlightCard from './SpotlightCard';
 
 interface BentoCardProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   delay?: number;
   id?: string;
 }
 
 export default function BentoCard({ children, className = '', delay = 0, id }: BentoCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const el = cardRef.current;
+    
+    gsap.fromTo(el, 
+      { 
+        opacity: 0, 
+        y: 50,
+        scale: 0.95 
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        delay: delay,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+  }, [delay]);
+
   return (
-    <motion.div
+    <div
+      ref={cardRef}
       id={id}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      className={`relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow flex flex-col ${className}`}
+      className={className}
     >
-      {children}
-    </motion.div>
+      <SpotlightCard className="h-full p-6 group">
+        {children}
+      </SpotlightCard>
+    </div>
   );
 }
-

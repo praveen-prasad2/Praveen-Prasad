@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import BentoCard from './BentoCard';
 import { Project } from '@/types/portfolio';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 
 interface ProjectsCardProps {
   projects: Project[];
@@ -28,75 +29,64 @@ export default function ProjectsCard({ projects, contactEmail }: ProjectsCardPro
   const paginatedProjects = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
-    const current = projects.slice(start, end);
-
-    if (current.length < PAGE_SIZE) {
-      return current;
-    }
-
-    return current;
+    return projects.slice(start, end);
   }, [page, projects]);
 
-  const showingStart = projects.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
-  const showingEnd = Math.min(page * PAGE_SIZE, projects.length);
   const placeholderCount = Math.max(0, PAGE_SIZE - paginatedProjects.length);
 
   return (
     <BentoCard id="projects" className="md:col-span-2 lg:col-span-4" delay={0.4}>
-      <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
+      <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Featured Projects</h2>
-          <p className="text-sm text-gray-500 mt-1">Selected work highlighting impact-driven outcomes.</p>
+          <h2 className="text-2xl font-bold text-white tracking-tight">Featured Projects</h2>
+          <p className="text-sm text-white/40 mt-1 uppercase tracking-widest text-[10px]">Digital Architecture</p>
         </div>
         {contactEmail && (
           <a
             href={`mailto:${contactEmail}?subject=Case%20study%20request`}
-            className="text-sm font-medium text-primary-600 hover:underline"
+            className="group flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-bold text-blue-400 hover:text-blue-300 transition-colors"
           >
-            Request full case studies →
+            Full Case Studies <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </a>
         )}
-        <div className="text-xs text-gray-500">
-          {projects.length > 0 ? (
-            <span>
-              Showing {showingStart}-{showingEnd} of {projects.length} projects
-            </span>
-          ) : (
-            <span>No projects added yet</span>
-          )}
-        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {paginatedProjects.map((project) => (
           <div
             key={project.id}
-            className="h-full p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-primary-500 transition-colors flex flex-col"
+            className="group relative h-full p-6 bg-white/[0.03] rounded-2xl border border-white/5 hover:border-blue-500/30 transition-all flex flex-col overflow-hidden"
           >
-            <h3 className="font-semibold text-gray-900 mb-2 text-lg">
+            {/* Background Glow */}
+            <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-colors" />
+
+            <h3 className="font-bold text-white mb-3 text-lg group-hover:text-blue-400 transition-colors">
               {project.title}
             </h3>
-            <p className="text-sm text-gray-700 mb-4 flex-1">
+            <p className="text-sm text-white/50 mb-6 flex-1 leading-relaxed">
               {project.description}
             </p>
-            <div className="flex flex-wrap gap-1 mb-3">
+            
+            <div className="flex flex-wrap gap-2 mb-6">
               {project.technologies.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="text-xs px-2 py-1 bg-primary-100 rounded text-primary-700"
+                  className="text-[9px] px-2 py-1 bg-white/5 border border-white/5 rounded text-white/40 uppercase tracking-tighter"
                 >
                   {tech}
                 </span>
               ))}
             </div>
-            <div className="flex gap-3 text-sm">
+
+            <div className="flex items-center gap-4 mt-auto">
               {project.link && (
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-600 hover:underline font-medium"
+                  className="flex items-center gap-1.5 text-[10px] font-bold text-white uppercase tracking-widest hover:text-blue-400 transition-colors"
                 >
-                  Live Demo
+                  <ExternalLink className="w-3 h-3" /> Preview
                 </a>
               )}
               {project.github && (
@@ -104,9 +94,9 @@ export default function ProjectsCard({ projects, contactEmail }: ProjectsCardPro
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 hover:underline"
+                  className="flex items-center gap-1.5 text-[10px] font-bold text-white/40 uppercase tracking-widest hover:text-white transition-colors"
                 >
-                  GitHub
+                  <Github className="w-3 h-3" /> Code
                 </a>
               )}
             </div>
@@ -116,53 +106,50 @@ export default function ProjectsCard({ projects, contactEmail }: ProjectsCardPro
           Array.from({ length: placeholderCount }).map((_, index) => (
             <div
               key={`placeholder-${index}`}
-              className="h-full p-4 bg-gray-50/60 rounded-xl border border-dashed border-gray-300 flex flex-col items-center justify-center text-center text-xs text-gray-400"
+              className="h-full p-6 bg-white/[0.01] rounded-2xl border border-dashed border-white/10 flex flex-col items-center justify-center text-center group opacity-50"
             >
-              <span>Project slot available</span>
-              <span className="mt-1 text-[11px] text-gray-300">
-                Add more projects from the admin panel.
-              </span>
+              <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center mb-3">
+                <span className="text-white/20">+</span>
+              </div>
+              <span className="text-[10px] uppercase tracking-widest text-white/20">Future Innovation</span>
             </div>
           ))}
       </div>
+
       {totalPages > 1 && (
-        <div className="flex items-center justify-between mt-6">
+        <div className="flex items-center justify-center gap-4 mt-10">
           <button
             onClick={() => setPage((prev) => Math.max(1, prev - 1))}
             disabled={page === 1}
-            className="px-3 py-1.5 rounded-lg border border-gray-300 text-sm text-gray-700 hover:border-primary-500 hover:text-primary-600 transition-colors disabled:opacity-50"
+            className="p-2 rounded-full border border-white/5 text-white/40 hover:border-white/20 hover:text-white transition-all disabled:opacity-20"
           >
-            Previous
+            <ArrowRight className="w-4 h-4 rotate-180" />
           </button>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          
+          <div className="flex items-center gap-2">
             {Array.from({ length: totalPages }).map((_, index) => {
               const pageNumber = index + 1;
-              const isActive = pageNumber === page;
               return (
                 <button
                   key={pageNumber}
                   onClick={() => setPage(pageNumber)}
-                  className={`h-8 w-8 rounded-full border text-xs transition-colors ${
-                    isActive
-                      ? 'border-primary-500 bg-primary-500 text-white'
-                      : 'border-gray-300 text-gray-600 hover:border-primary-500'
+                  className={`w-1.5 h-1.5 rounded-full transition-all ${
+                    pageNumber === page ? 'w-8 bg-blue-500' : 'bg-white/20 hover:bg-white/40'
                   }`}
-                >
-                  {pageNumber}
-                </button>
+                />
               );
             })}
           </div>
+
           <button
             onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
             disabled={page === totalPages}
-            className="px-3 py-1.5 rounded-lg border border-gray-300 text-sm text-gray-700 hover:border-primary-500 hover:text-primary-600 transition-colors disabled:opacity-50"
+            className="p-2 rounded-full border border-white/5 text-white/40 hover:border-white/20 hover:text-white transition-all disabled:opacity-20"
           >
-            Next
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       )}
     </BentoCard>
   );
 }
-

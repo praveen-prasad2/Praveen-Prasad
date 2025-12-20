@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function NavigationBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,7 +18,7 @@ export default function NavigationBar() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80; // Account for fixed navbar height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -40,77 +40,71 @@ export default function NavigationBar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] max-w-4xl ${
         isScrolled
-          ? 'bg-white/80 backdrop-blur-md shadow-sm border-b border-gray-200'
-          : 'bg-transparent'
+          ? 'top-4'
+          : 'top-6'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo/Brand */}
-          <button
-            onClick={() => scrollToSection('about')}
-            className="text-xl font-bold text-gray-900 hover:text-primary-600 transition-colors"
-          >
-            Praveen.
-          </button>
+      <div className={`glass-dark rounded-full px-6 py-3 flex items-center justify-between transition-all duration-500 ${
+        isScrolled ? 'border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.5)]' : 'border-white/10'
+      }`}>
+        {/* Logo */}
+        <button
+          onClick={() => scrollToSection('about')}
+          className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+        >
+          P.
+        </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-2">
+          {navLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              className="px-4 py-1.5 text-xs uppercase tracking-widest font-medium text-white/70 hover:text-white transition-colors relative group"
+            >
+              {link.label}
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-blue-500 transition-all duration-300 group-hover:w-1/2" />
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden p-2 text-white/70 hover:text-white"
+        >
+          <div className="w-6 h-5 flex flex-col justify-between items-end">
+            <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'w-6 translate-y-2 -rotate-45' : 'w-6'}`} />
+            <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'opacity-0' : 'w-4'}`} />
+            <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'w-6 -translate-y-2 rotate-45' : 'w-5'}`} />
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden mt-4 glass-dark rounded-3xl p-6 flex flex-col gap-4 border-white/10"
+          >
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 rounded-lg hover:bg-gray-100 transition-colors"
+                className="text-lg font-medium text-white/70 hover:text-white transition-colors text-left"
               >
                 {link.label}
               </button>
             ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-gray-700 hover:text-primary-600"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden pb-4 border-t border-gray-200 mt-2 pt-4">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 rounded-lg hover:bg-gray-100 transition-colors text-left"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </nav>
   );
 }
-

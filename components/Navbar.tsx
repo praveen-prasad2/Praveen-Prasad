@@ -26,42 +26,42 @@ export default function Navbar({ name }: { name: string }) {
 
   return (
     <header
-      className={`sticky top-0 z-30 transition-all ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'backdrop-blur bg-white/80 border-b border-gray-200/60'
-          : 'bg-transparent'
+          ? 'bg-black/50 backdrop-blur-xl border-b border-white/10 py-3'
+          : 'bg-transparent py-6'
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-8">
-        <Link href="#top" className="text-lg font-semibold text-gray-900">
-          <span className="rounded-full bg-primary-500/10 px-3 py-1 text-sm uppercase tracking-[0.3em] text-primary-600">
-            Portfolio
-          </span>
-          <span className="ml-3 text-base font-medium">{name}</span>
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-12">
+        <Link href="/" className="group flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-[0_0_20px_rgba(37,99,235,0.3)] group-hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all">
+            {name.charAt(0)}
+          </div>
+          <span className="text-white font-bold tracking-tighter text-lg hidden sm:block">{name}</span>
         </Link>
 
-        <div className="hidden items-center gap-6 text-sm font-medium text-gray-600 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="relative transition-colors hover:text-primary-600"
+              className="text-xs uppercase tracking-[0.2em] font-bold text-white/50 hover:text-white transition-all relative group"
             >
               {item.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full" />
             </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <a
-            href="mailto:"
-            className="hidden rounded-full border border-gray-200 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-700 transition-all hover:border-primary-500 hover:text-primary-600 md:inline-flex"
+            href="#contact"
+            className="px-6 py-2.5 rounded-full bg-white text-black text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white transition-all shadow-xl"
           >
-            Let’s Talk
+            Hire Me
           </a>
         </div>
       </nav>
     </header>
   );
 }
-

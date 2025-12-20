@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import SmoothScroll from '@/components/SmoothScroll'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://praveen-portfolio.example.com'),
@@ -56,8 +57,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="dark">
+      <body className="bg-black text-white antialiased">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   )
 }
