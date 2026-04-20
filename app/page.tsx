@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <>
       {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
-      <div className="mesh-bg" />
+      <div className="ambient-bg" />
       <NavigationBar />
       
       <main className={`relative z-10 transition-opacity duration-1000 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
@@ -39,8 +39,8 @@ export default function Home() {
           start={!isLoading} 
         />
         
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pb-32 space-y-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[minmax(220px,auto)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 pb-32 space-y-16 md:space-y-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7 auto-rows-[minmax(220px,auto)]">
             <AboutCard about={portfolio.about} />
             <SkillsCard skills={portfolio.skills} />
             <ExperienceCard experiences={portfolio.experiences} />
@@ -57,8 +57,8 @@ export default function Home() {
           </div>
         </div>
         
-        <footer className="py-12 border-t border-white/5 text-center">
-          <p className="text-[10px] uppercase tracking-[0.5em] text-white/20 font-bold">
+        <footer className="relative border-t border-foreground/10 py-14 text-center dark:border-white/[0.06]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.45em] text-foreground/30 dark:text-white/25">
             © {new Date().getFullYear()} {portfolio.about.name} — Built with Next.js & GSAP
           </p>
         </footer>

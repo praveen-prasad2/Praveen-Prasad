@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
+import { themeInitScript } from '@/lib/theme'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://praveen-portfolio.example.com'),
@@ -57,11 +59,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-black text-white antialiased">
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-violet-500/30 selection:text-violet-950 dark:selection:text-white">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript() }}
+        />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   )
 }
-

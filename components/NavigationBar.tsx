@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function NavigationBar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,64 +41,65 @@ export default function NavigationBar() {
 
   return (
     <nav
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] max-w-4xl ${
-        isScrolled
-          ? 'top-4'
-          : 'top-6'
+      className={`fixed left-1/2 z-50 w-[min(96%,56rem)] -translate-x-1/2 transition-all duration-500 ${
+        isScrolled ? 'top-4' : 'top-6'
       }`}
     >
-      <div className={`glass-dark rounded-full px-6 py-3 flex items-center justify-between transition-all duration-500 ${
-        isScrolled ? 'border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.5)]' : 'border-white/10'
-      }`}>
-        {/* Logo */}
+      <div
+        className={`flex items-center justify-between gap-3 rounded-full border border-[color:var(--nav-border)] px-4 py-2.5 shadow-[var(--nav-shadow)] backdrop-blur-2xl transition-all duration-500 sm:px-5 sm:py-3 ${
+          isScrolled ? 'bg-[color:var(--nav-shell-scrolled)]' : 'bg-[color:var(--nav-shell)]'
+        }`}
+      >
         <button
           onClick={() => scrollToSection('about')}
-          className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+          className="text-xl font-extrabold tracking-tight text-gradient"
         >
           P.
         </button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden flex-1 items-center justify-center gap-1 md:flex">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => scrollToSection(link.id)}
-              className="px-4 py-1.5 text-xs uppercase tracking-widest font-medium text-white/70 hover:text-white transition-colors relative group"
+              className="group relative px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--nav-link)] transition-colors hover:text-[color:var(--nav-link-hover)]"
             >
               {link.label}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-blue-500 transition-all duration-300 group-hover:w-1/2" />
+              <span className="absolute bottom-0 left-1/2 h-px w-0 -translate-x-1/2 bg-gradient-to-r from-violet-500 to-cyan-500 transition-all duration-300 group-hover:w-3/5 dark:from-violet-400 dark:to-cyan-400" />
             </button>
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 text-white/70 hover:text-white"
-        >
-          <div className="w-6 h-5 flex flex-col justify-between items-end">
-            <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'w-6 translate-y-2 -rotate-45' : 'w-6'}`} />
-            <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'opacity-0' : 'w-4'}`} />
-            <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'w-6 -translate-y-2 rotate-45' : 'w-5'}`} />
-          </div>
-        </button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-[color:var(--nav-link)] transition-colors hover:text-[color:var(--nav-link-hover)] md:hidden"
+            aria-label="Toggle menu"
+          >
+            <div className="flex h-5 w-6 flex-col items-end justify-between">
+              <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'w-6 translate-y-2 -rotate-45' : 'w-6'}`} />
+              <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'opacity-0' : 'w-4'}`} />
+              <span className={`h-0.5 bg-current transition-all ${isMobileMenuOpen ? 'w-6 -translate-y-2 rotate-45' : 'w-5'}`} />
+            </div>
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden mt-4 glass-dark rounded-3xl p-6 flex flex-col gap-4 border-white/10"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.2 }}
+            className="mt-3 flex flex-col gap-1 rounded-3xl border border-[color:var(--nav-border)] bg-[color:var(--nav-mobile-bg)] p-5 shadow-2xl backdrop-blur-2xl md:hidden"
           >
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-lg font-medium text-white/70 hover:text-white transition-colors text-left"
+                className="rounded-xl px-3 py-3 text-left text-base font-medium text-foreground/70 transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
               >
                 {link.label}
               </button>
