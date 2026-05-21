@@ -4,15 +4,33 @@ import { colors } from '@/lib/design-tokens';
 import type { DesktopApp } from './types';
 import type { AppId } from '@/types/apps';
 
+/** Icon graphic size in pixels — decrease to make icons smaller (e.g. 40, 48, 52) */
+export const DESKTOP_ICON_SIZE_PX = 48;
+
+
+export const DESKTOP_ICON_CELL_WIDTH_PX = 72;
+
+/** Folder icon for portfolio sections */
+export const MAC_FOLDER_ICON = '/mac-folder.svg';
+
+export const DESKTOP_APP_ICON_SRC: Partial<
+  Record<AppId, string>
+> = {
+  terminal: '/icons/terminal.png',
+  safari: '/icons/safari.png',
+  notes: '/icons/notes.png',
+  music: '/icons/applemusicicon.jpg',
+};
+
 const ICON_MAP: Record<string, DesktopApp['icon']> = {
   about: 'folder-blue',
   services: 'folder-purple',
   experience: 'folder-green',
-  skills: 'app-code',
-  projects: 'app-safari',
-  contact: 'app-mail',
+  skills: 'folder-blue',
+  projects: 'folder-purple',
+  contact: 'folder-green',
+  resume: 'folder-blue',
   terminal: 'app-terminal',
-  resume: 'app-resume',
   notes: 'app-notes',
   safari: 'app-safari',
   music: 'app-music',
@@ -28,6 +46,7 @@ function toDesktopApp(
     id,
     label: meta.label,
     icon: ICON_MAP[id] ?? 'folder-blue',
+    iconImage: DESKTOP_APP_ICON_SRC[id],
     defaultPosition: pos,
     windowTitle: meta.windowTitle,
     defaultSize: size,
@@ -59,13 +78,15 @@ export type WallpaperConfig = {
 
 export const WALLPAPERS: WallpaperConfig[] = [
   {
-    id: 'mac',
+    id: 'mac-default',
     name: 'macOS',
     color: colors.surfaceTile1,
     image: '/mac-wallpaper.jpg',
   },
-  { id: 'parchment', name: 'Parchment', color: colors.canvasParchment },
-  { id: 'canvas', name: 'Canvas', color: colors.canvas },
-  { id: 'tile-1', name: 'Studio Dark', color: colors.surfaceTile1 },
-  { id: 'tile-2', name: 'Studio', color: colors.surfaceTile2 },
+  {
+    id: 'spiderman',
+    name: 'Spiderman',
+    color: colors.surfaceBlack,
+    image: '/spiderman.jpg',
+  },
 ];

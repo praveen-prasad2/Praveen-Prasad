@@ -62,7 +62,7 @@ function DesktopInner({ data }: { data: PortfolioData }) {
   };
 
   const wp = WALLPAPERS[wallpaperIdx];
-  const isDarkWallpaper = wp.id.startsWith('tile') || wp.id === 'mac';
+  const isDarkWallpaper = !!wp.image;
 
   return (
     <div
