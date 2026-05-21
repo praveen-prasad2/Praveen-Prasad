@@ -183,6 +183,44 @@
       "technologies": ["React", "Node.js", "MongoDB", "WordPress"]
     }
   ],
+  "services": [
+    {
+      "id": "1",
+      "title": "Full-Stack Development",
+      "description": "End-to-end web applications with Next.js, React, TypeScript, and Node.js — from architecture to deployment.",
+      "icon": "code"
+    },
+    {
+      "id": "2",
+      "title": "UI Engineering",
+      "description": "Pixel-perfect, accessible interfaces with Tailwind, Framer Motion, and design-system thinking.",
+      "icon": "palette"
+    },
+    {
+      "id": "3",
+      "title": "WordPress & CMS",
+      "description": "Custom themes, plugins, and performant content sites for brands and agencies.",
+      "icon": "layout"
+    },
+    {
+      "id": "4",
+      "title": "Workflow Automation",
+      "description": "n8n pipelines and integrations that connect APIs, CRMs, and internal tools.",
+      "icon": "workflow"
+    },
+    {
+      "id": "5",
+      "title": "E-commerce",
+      "description": "Shopify storefronts and checkout flows optimized for conversion and maintainability.",
+      "icon": "shopping"
+    },
+    {
+      "id": "6",
+      "title": "Consulting & Leadership",
+      "description": "Technical guidance, code reviews, and team mentorship for shipping reliable products.",
+      "icon": "users"
+    }
+  ],
   "projects": [
     {
       "id": "1",

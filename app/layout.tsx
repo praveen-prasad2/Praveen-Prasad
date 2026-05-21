@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import './globals.css'
-import SmoothScroll from '@/components/SmoothScroll'
-import { themeInitScript } from '@/lib/theme'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://praveen-portfolio.example.com'),
@@ -11,46 +8,25 @@ export const metadata: Metadata = {
     template: '%s | Praveen Prasad Portfolio',
   },
   description:
-    'Discover the work of Praveen Prasad — full-stack developer crafting elegant experiences with Next.js, TypeScript, and modern design systems.',
+    'Photography-first portfolio experience inspired by Apple design — full-stack developer crafting elegant digital products.',
   keywords: [
     'Praveen Prasad',
     'Portfolio',
     'Full Stack Developer',
     'Next.js',
     'TypeScript',
-    'React',
-    'Tailwind CSS',
-    'UI Engineer',
   ],
   authors: [{ name: 'Praveen Prasad', url: 'https://www.linkedin.com/in/praveenprasad' }],
   openGraph: {
     title: 'Praveen Prasad — Portfolio',
-    description:
-      'Designing and building performant digital products with a focus on clean UX and modern web standards.',
+    description: 'An immersive Apple-inspired portfolio operating system.',
     url: 'https://praveen-portfolio.example.com',
     siteName: 'Praveen Prasad Portfolio',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Preview of Praveen Prasad Portfolio',
-      },
-    ],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Portfolio preview' }],
     locale: 'en_US',
     type: 'website',
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Praveen Prasad — Portfolio',
-    description:
-      'Designing and building performant digital products with a focus on clean UX and modern web standards.',
-    images: ['/og-image.png'],
-  },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
+  icons: { icon: '/favicon.ico', apple: '/apple-touch-icon.png' },
 }
 
 export default function RootLayout({
@@ -60,13 +36,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-violet-500/30 selection:text-violet-950 dark:selection:text-white">
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: themeInitScript() }}
-        />
-        <SmoothScroll>{children}</SmoothScroll>
+      <body className="min-h-screen overflow-hidden bg-apple-parchment font-text text-apple-ink antialiased">
+        {children}
       </body>
     </html>
   )

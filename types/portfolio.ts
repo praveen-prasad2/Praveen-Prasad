@@ -43,10 +43,18 @@ export interface About {
   socials?: SocialLink[];
 }
 
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
 export interface PortfolioData {
   about: About;
   skills: Skill[];
   experiences: Experience[];
   projects: Project[];
+  services?: Service[];
 }
 

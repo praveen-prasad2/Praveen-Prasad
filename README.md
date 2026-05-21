@@ -1,88 +1,37 @@
-# Portfolio Website - Bento Grid Design
+# Praveen Prasad — Portfolio OS
 
-A modern, single-page portfolio website with a bento grid layout, built with Next.js, TypeScript, and Tailwind CSS.
+An Apple-inspired portfolio that runs as a desktop (macOS) or phone (iOS) experience. Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
 
 ## Features
 
-- 🎨 **Bento Grid Design** - Modern, responsive grid layout with green/white theme
-- 📱 **Fully Responsive** - Works on all device sizes
-- 🎭 **Dark Mode Support** - Automatic dark mode based on system preferences
-- 🎬 **Minimal Animations** - Smooth, subtle animations using Framer Motion
-- 🔧 **TypeScript** - Fully typed for better development experience
-- 🎨 **Modern Typography** - Urbanist font for a clean, professional look
+- macOS-style desktop with draggable windows, dock, and Spotlight (`Cmd/Ctrl + K`)
+- iPhone-style home screen on mobile with app grid and fullscreen apps
+- Design system from `DESIGN.md` (Action Blue, SF Pro typography, product tiles)
+- Content driven by `data/portfolio.json`
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+ installed
-- npm or yarn package manager
-
-### Installation
-
-1. Install dependencies:
 ```bash
 npm install
-```
-
-2. Run the development server:
-```bash
 npm run dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+Open [http://localhost:3000](http://localhost:3000).
 
-## Usage
-
-### Viewing the Portfolio
-
-Navigate to the home page to see your portfolio with the bento grid layout.
-
-### Editing Content
-
-All portfolio data lives in `data/portfolio.json`. Update this file to change the About, Skills, Experience, Projects, or Contact information displayed on the site.
-
-## Project Structure
+## Project structure
 
 ```
-├── app/
-│   ├── globals.css     # Global styles
-│   ├── layout.tsx      # Root layout
-│   └── page.tsx        # Portfolio home page
-├── components/         # React components
-│   ├── AboutCard.tsx
-│   ├── BentoCard.tsx
-│   ├── ExperienceCard.tsx
-│   ├── ProjectsCard.tsx
-│   └── SkillsCard.tsx
-├── data/               # JSON data storage
-│   └── portfolio.json
-└── types/              # TypeScript type definitions
-    └── portfolio.ts
+app/                 # Next.js app shell
+components/
+  content/           # Shared app window content
+  macos/             # Desktop experience
+  ios/               # Mobile experience
+  os/                # Adaptive PortfolioOS root
+data/portfolio.json  # Portfolio data
+lib/                 # Window store, apps registry, design tokens
+DESIGN.md            # Design system reference
 ```
 
-## Customization
+## Edit content
 
-### Styling
-
-The project uses Tailwind CSS. Modify `tailwind.config.ts` to customize colors, spacing, and other design tokens.
-
-### Animations
-
-Animations are handled by Framer Motion. Adjust animation parameters in `components/BentoCard.tsx` for different effects.
-
-### Content
-
-Update `data/portfolio.json` to manage the static content shown on the site.
-
-## Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## License
-
-MIT
-
+Update `data/portfolio.json` — about, skills, experience, projects, services, socials.
