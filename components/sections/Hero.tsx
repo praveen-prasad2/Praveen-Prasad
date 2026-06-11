@@ -1,42 +1,72 @@
 import type { About } from '@/types/portfolio';
 import { ArrowDown } from 'lucide-react';
+import Reveal from '@/components/ui/Reveal';
 
 export default function Hero({ about }: { about: About }) {
+  const firstName = about.name.split(' ')[0];
+
   return (
-    <section id="hero" className="flex min-h-screen flex-col justify-center pt-16">
-      {/* <div className="container-main">
-        <p className="label mb-6">Portfolio — {new Date().getFullYear()}</p>
-
-        <h1 className="heading-xl max-w-4xl">
-          {about.name.split(' ').map((word, i) => (
-            <span key={i} className="block">
-              {word}
-            </span>
-          ))}
-        </h1>
-
-        <p className="mt-6 max-w-xl text-lg text-white md:text-xl">
-          {about.title} building fast, scalable web products with modern tools.
-        </p>
-
-        <div className="mt-10 flex flex-wrap gap-4">
-          <a href="#projects" className="btn">View work</a>
-          <a href="#contact" className="btn-ghost">Get in touch</a>
-        </div>
-
-        <div className="mt-20 flex flex-wrap gap-8 border-t border-black/15 pt-8 text-sm text-muted">
-          <span>{about.location}</span>
-          <a href={`mailto:${about.email}`} className="transition hover:text-white">
-            {about.email}
-          </a>
-        </div>
+    <section id="hero" className="relative flex min-h-screen flex-col justify-center pt-24">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -left-20 bottom-1/4 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <a href="#about" className="container-main mt-auto pb-10 pt-16" aria-label="Scroll to about">
-        <ArrowDown className="h-5 w-5 animate-bounce text-ink" />
-      </a> */}
+      <div className="container-main relative">
+        <Reveal>
+          <p className="label">Portfolio — {new Date().getFullYear()}</p>
+        </Reveal>
 
-      
+        <Reveal delay={100}>
+          <h1 className="heading-xl mt-6 max-w-4xl">
+            Turning Ideas Into Digital Reality
+          </h1>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <p className="mt-8 max-w-2xl text-lg text-white/85 md:text-xl">
+            I&apos;m {firstName} — a developer who builds websites, products, and
+            businesses, not just pages.
+          </p>
+        </Reveal>
+
+        <Reveal delay={300}>
+          <div className="mt-10 space-y-4 max-w-2xl text-white/70">
+            <p>Most people see a website as a collection of screens.</p>
+            <p className="text-primary font-medium">I see it as a growth engine.</p>
+            <p>
+              Whether it&apos;s a startup idea, a business website, or a SaaS product,
+              I focus on creating digital experiences that solve problems, attract
+              customers, and generate results.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={400}>
+          <p className="mt-10 font-anton text-lg tracking-wide text-primary md:text-xl">
+            Developer. Problem Solver. Builder.
+          </p>
+        </Reveal>
+
+        <Reveal delay={500}>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a href="#projects" className="btn">
+              Explore My Work
+            </a>
+            <a href="#contact" className="btn-ghost">
+              Let&apos;s Build Something
+            </a>
+          </div>
+        </Reveal>
+      </div>
+
+      <a
+        href="#about"
+        className="container-main mt-auto flex pb-10 pt-20"
+        aria-label="Scroll to about"
+      >
+        <ArrowDown className="h-5 w-5 animate-bounce text-primary" />
+      </a>
     </section>
   );
 }

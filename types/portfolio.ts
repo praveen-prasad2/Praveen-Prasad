@@ -1,9 +1,9 @@
 export interface Skill {
   id: string;
   name: string;
-  level: number; // 1-100 (kept for backward compatibility, but not displayed)
+  level: number;
   category: string;
-  icon?: string; // Path to uploaded icon image (PNG/SVG)
+  icon?: string;
 }
 
 export interface SocialLink {
@@ -57,4 +57,3 @@ export interface PortfolioData {
   projects: Project[];
   services?: Service[];
 }
-

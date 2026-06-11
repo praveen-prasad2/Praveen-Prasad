@@ -1,90 +1,87 @@
-'use client';
-
-import Link from 'next/link';
 import type { SocialLink } from '@/types/portfolio';
-import { SOCIAL_ICON_MAP, getSocialIconKey } from '@/lib/socials';
+import { Github, Instagram, Linkedin, Mail, MapPin } from 'lucide-react';
+import Reveal from '@/components/ui/Reveal';
 
-interface ContactProps {
+const SOCIAL_ICONS: Record<string, typeof Linkedin> = {
+  linkedin: Linkedin,
+  github: Github,
+  instagram: Instagram,
+};
+
+export default function Contact({
+  email,
+  location,
+  socials = [],
+}: {
   email: string;
   location: string;
-  name: string;
   socials?: SocialLink[];
-}
-
-export default function Contact({ email, location, name, socials }: ContactProps) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const subject = String(fd.get('subject') || 'Portfolio inquiry');
-    const body = String(fd.get('message') || '');
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
-
+}) {
   return (
-    <section id="contact" className="section border-b border-black/15">
-      <div className="container-main grid gap-16 lg:grid-cols-2">
-        <div>
-          <p className="label mb-4">05 — Contact</p>
-          <h2 className="heading-lg">Let&apos;s work together</h2>
-          <p className="body mt-6 max-w-md">
-            Have a project in mind? Send a message and I&apos;ll get back to you.
-          </p>
+    <section id="contact" className="section pb-24">
+      <div className="container-main">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <p className="label">Contact</p>
+            <h2 className="heading-lg mt-4">Got an Idea?</h2>
+          </Reveal>
 
-          <div className="mt-10 space-y-6">
-            <div>
-              <p className="label mb-2">Email</p>
-              <a href={`mailto:${email}`} className="text-xl font-bold text-ink hover:opacity-80">
+          <Reveal delay={100}>
+            <p className="body mt-6 text-white/80">
+              Most great products begin with a conversation. Whether you need a
+              website, a web application, or someone to help bring your idea to life,
+              let&apos;s connect.
+            </p>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <p className="mt-8 font-anton text-2xl text-primary md:text-3xl">
+              Let&apos;s Build Something Worth Remembering.
+            </p>
+          </Reveal>
+
+          <Reveal delay={300}>
+            <div className="mt-12 flex flex-col items-center gap-6">
+              <a
+                href={`mailto:${email}`}
+                className="group flex items-center gap-3 text-lg transition hover:text-primary"
+              >
+                <Mail className="h-5 w-5 text-primary" />
                 {email}
               </a>
-            </div>
-            <div>
-              <p className="label mb-2">Location</p>
-              <p className="text-white">{location}</p>
-            </div>
-            {socials && socials.length > 0 && (
-              <div>
-                <p className="label mb-3">Social</p>
-                <div className="flex flex-wrap gap-3">
-                  {socials.map((s) => {
-                    const Icon = SOCIAL_ICON_MAP[getSocialIconKey(s.platform, s.icon)];
-                    return (
-                      <Link
-                        key={s.id}
-                        href={s.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-ghost !px-4 !py-2 !text-xs"
-                      >
-                        {Icon && <Icon className="h-4 w-4" />}
-                        {s.platform}
-                      </Link>
-                    );
-                  })}
-                </div>
+
+              <p className="flex items-center gap-3 text-white/70">
+                <MapPin className="h-5 w-5 text-primary" />
+                {location}
+              </p>
+
+              <div className="mt-4 flex flex-wrap justify-center gap-4">
+                {socials.map((social) => {
+                  const Icon = SOCIAL_ICONS[social.icon ?? ''] ?? Linkedin;
+                  return (
+                    <a
+                      key={social.id}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card flex items-center gap-2 !px-5 !py-3 transition hover:border-primary/40 hover:text-primary"
+                    >
+                      <Icon className="h-4 w-4" />
+                      {social.platform}
+                    </a>
+                  );
+                })}
               </div>
-            )}
-          </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={400}>
+            <a href={`mailto:${email}`} className="btn mt-12">
+              Let&apos;s Build Something
+            </a>
+          </Reveal>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-2">
-          <input name="name" required placeholder="Your name" className="input" />
-          <input name="subject" placeholder="Subject" className="input" />
-          <textarea
-            name="message"
-            required
-            rows={4}
-            placeholder="Message"
-            className="input resize-none"
-          />
-          <button type="submit" className="btn mt-6">
-            Send message
-          </button>
-        </form>
       </div>
-
-      <footer className="container-main mt-20 border-t border-black/15 pt-8 text-center text-sm text-faint">
-        &copy; {new Date().getFullYear()} {name}. All rights reserved.
-      </footer>
     </section>
   );
 }

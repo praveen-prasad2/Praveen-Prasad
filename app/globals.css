@@ -1,140 +1,96 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --color-bg: #052210;
-  --color-ink: #4adb26;
-  --color-white: #ffffff;
-  --color-muted: rgba(255, 255, 255, 0.75);
-  --color-faint: rgba(255, 255, 255, 0.5);
-  --color-border: rgba(0, 0, 0, 0.15);
+  --color-primary: #4adb26;
   --section-y: clamp(5rem, 10vw, 8rem);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-behavior: auto;
 }
 
-html,
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 body {
-  min-height: 100%;
+  background-color: var(--color-bg);
+  color: #ffffff;
   overflow-x: clip;
-  font-family: var(--font-sans);
-  color: var(--color-white);
-  background: var(--color-bg);
-  -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-ink);
-  color: var(--color-white);
+  background: var(--color-primary);
+  color: var(--color-bg);
 }
 
 ::-webkit-scrollbar {
   width: 5px;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--color-ink);
+  background: var(--color-primary);
   border-radius: 4px;
 }
 
 @layer components {
+  .font-anton {
+    font-family: var(--font-anton), sans-serif;
+  }
+
+  .font-poppins {
+    font-family: var(--font-poppins), sans-serif;
+  }
+
   .container-main {
     @apply mx-auto w-full max-w-6xl px-5 md:px-8;
   }
 
   .section {
-    @apply border-t border-black/15 py-[var(--section-y)];
+    @apply border-t border-white/10 py-[var(--section-y)];
   }
 
   .heading-xl {
-    @apply text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-6xl lg:text-7xl;
+    @apply font-anton text-4xl uppercase leading-tight tracking-wide text-white sm:text-5xl md:text-6xl lg:text-7xl;
   }
 
   .heading-lg {
-    @apply text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl;
+    @apply font-anton text-3xl uppercase tracking-wide text-white sm:text-4xl md:text-5xl;
   }
 
   .heading-md {
-    @apply text-xl font-bold text-ink sm:text-2xl;
+    @apply font-anton text-xl tracking-wide text-white sm:text-2xl;
   }
 
   .label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-faint;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-primary;
   }
 
   .body {
-    @apply text-base leading-relaxed text-muted md:text-lg;
+    @apply text-base leading-relaxed text-white/80 md:text-lg;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-bg transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink;
-    border-color: rgba(255, 255, 255, 0.4);
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-primary hover:text-primary hover:scale-[1.02] active:scale-[0.98];
   }
 
   .card {
-    @apply rounded-2xl border border-black/15 bg-black/5 p-5 backdrop-blur-sm transition hover:bg-black/10 md:p-6;
-  }
-
-  .input {
-    @apply w-full border-b bg-transparent py-3 text-white outline-none transition placeholder:text-faint focus:border-white;
-    border-color: rgba(255, 255, 255, 0.25);
-  }
-
-  .nav-header {
-    @apply fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md;
-    background: rgba(255, 21, 21, 0.92);
-    border-color: rgba(0, 0, 0, 0.1);
+    @apply rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm md:p-6;
   }
 
   .tag {
-    @apply rounded-full border border-black/15 px-3 py-1 text-xs font-medium text-muted;
+    @apply rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70;
   }
-}
-
-body.custom-cursor,
-body.custom-cursor * {
-  cursor: none !important;
-}
-
-.dot-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
-  border-radius: 50%;
-  background: var(--color-white);
-  pointer-events: none;
-  opacity: 0;
-  transition: width 0.2s, height 0.2s, margin 0.2s, background 0.2s, opacity 0.15s;
-  will-change: transform;
-}
-
-.dot-cursor-visible {
-  opacity: 1;
-}
-
-.dot-cursor-hover {
-  width: 28px;
-  height: 28px;
-  margin: -14px 0 0 -14px;
-  background: var(--color-ink);
 }

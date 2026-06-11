@@ -1,42 +1,60 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/lib/cn';
 
 const LINKS = [
   { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Services', href: '#services' },
   { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="nav-header">
-      <nav className="container-main flex h-16 items-center justify-between">
-        <a href="#hero" className="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-sm font-bold text-white">
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        scrolled ? 'border-b border-white/10 bg-bg/80 py-3 backdrop-blur-md' : 'bg-transparent py-5'
+      )}
+    >
+      <nav className="container-main flex items-center justify-between">
+        <a href="#hero" className="font-anton text-xl tracking-wide text-primary">
           PP
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-8 lg:flex">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="text-sm font-medium text-white/80 transition hover:text-white">
+              <a
+                href={link.href}
+                className="text-sm text-white/70 transition hover:text-primary"
+              >
                 {link.label}
               </a>
             </li>
           ))}
         </ul>
 
-        <a href="#contact" className="btn hidden !py-2.5 !text-xs md:inline-flex">
-          Contact
+        <a href="#contact" className="btn hidden lg:inline-flex">
+          Let&apos;s Talk
         </a>
 
         <button
           type="button"
-          className="text-sm font-semibold text-white md:hidden"
+          className="text-sm font-medium text-white lg:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -44,18 +62,22 @@ export default function Navbar() {
         </button>
       </nav>
 
-      <div className={cn('border-t border-black/10 md:hidden', !open && 'hidden')}>
+      <div className={cn('border-t border-white/10 lg:hidden', !open && 'hidden')}>
         <ul className="container-main flex flex-col gap-4 py-5">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="text-lg font-medium" onClick={() => setOpen(false)}>
+              <a
+                href={link.href}
+                className="text-lg"
+                onClick={() => setOpen(false)}
+              >
                 {link.label}
               </a>
             </li>
           ))}
           <li>
             <a href="#contact" className="btn w-full" onClick={() => setOpen(false)}>
-              Contact
+              Let&apos;s Talk
             </a>
           </li>
         </ul>
