@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import DotCursor from '@/components/ui/DotCursor'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
     template: '%s | Praveen Prasad Portfolio',
   },
   description:
-    'Photography-first portfolio experience inspired by Apple design — full-stack developer crafting elegant digital products.',
+    'Full-stack developer crafting scalable web applications with Next.js, React, TypeScript, and Node.js.',
   keywords: [
     'Praveen Prasad',
     'Portfolio',
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
     'Next.js',
     'TypeScript',
   ],
-  authors: [{ name: 'Praveen Prasad', url: 'https://www.linkedin.com/in/praveenprasad' }],
+  authors: [{ name: 'Praveen Prasad', url: 'https://www.linkedin.com/in/praveen-prasad-14764b231/' }],
   openGraph: {
     title: 'Praveen Prasad — Portfolio',
-    description: 'An immersive Apple-inspired portfolio operating system.',
+    description: 'Full-stack developer portfolio — Next.js, React, TypeScript, Node.js.',
     url: 'https://praveen-portfolio.example.com',
     siteName: 'Praveen Prasad Portfolio',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Portfolio preview' }],
@@ -36,9 +37,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen overflow-hidden bg-apple-parchment font-text text-apple-ink antialiased">
+      <body className="min-h-screen bg-bg font-sans text-white antialiased">
+        <DotCursor />
         {children}
       </body>
     </html>
-  )
+  );
 }
