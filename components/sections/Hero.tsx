@@ -1,5 +1,6 @@
 import type { About } from '@/types/portfolio';
 import { ArrowDown } from 'lucide-react';
+import BlurText from '@/components/ui/BlurText';
 import Reveal from '@/components/ui/Reveal';
 
 export default function Hero({ about }: { about: About }) {
@@ -17,19 +18,24 @@ export default function Hero({ about }: { about: About }) {
           <p className="label"></p>
         </Reveal>
 
-        <Reveal delay={100}>
-          <h1 className="mx-auto mt-6 max-w-4xl text-8xl font-bold font-poppins text-accent">
-            Praveen Prasad.
-          </h1>
-        </Reveal>
+        <BlurText
+          as="h1"
+          text="Praveen Prasad."
+          delay={120}
+          animateBy="words"
+          direction="top"
+          className="mx-auto mt-6 max-w-4xl justify-center text-8xl font-bold font-poppins text-accent"
+        />
 
-        <Reveal delay={200}>
-          <p className="mx-auto mt-8 max-w-2xl text-lg text-accent/85 md:text-xl">
-            I&apos;m {firstName} — a developer who builds websites, products, and
-            businesses, not just pages.
-          </p>
-        </Reveal>
-
+        <BlurText
+          text={`I'm a developer who builds websites, products, and businesses, not just pages.`}
+          delay={80}
+          animateBy="words"
+          direction="top"
+          threshold={0.5}
+          className="mx-auto mt-8 max-w-2xl justify-center text-lg text-accent/85 md:text-xl"
+        />
+{/* 
         <Reveal delay={300}>
           <div className="mx-auto mt-10 max-w-2xl space-y-4 text-accent/70">
             <p>Most people see a website as a collection of screens.</p>
@@ -40,13 +46,15 @@ export default function Hero({ about }: { about: About }) {
               customers, and generate results.
             </p>
           </div>
-        </Reveal>
+        </Reveal> */}
 
-        <Reveal delay={400}>
-          <p className="mt-10 font-anton text-lg tracking-wide text-primary md:text-xl">
-            Developer. Problem Solver. Builder.
-          </p>
-        </Reveal>
+        <BlurText
+          text="Developer. Problem Solver. Creator."
+          delay={100}
+          animateBy="words"
+          direction="bottom"
+          className="mt-10 justify-center font-anton text-lg tracking-wide text-primary md:text-xl"
+        />
 
         <Reveal delay={500}>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
