@@ -26,7 +26,7 @@ export default function Experience({ experiences }: { experiences: Experience[] 
                       </div>
                       <span className="tag">{exp.period}</span>
                     </div>
-                    <p className="body mt-4 !text-base text-white/75">{exp.description}</p>
+                    <p className="body mt-4 !text-base">{exp.description}</p>
                     <div className="mt-5 flex flex-wrap gap-2">
                       {exp.technologies.map((tech) => (
                         <span key={tech} className="tag">

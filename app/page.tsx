@@ -5,6 +5,7 @@ import Services from '@/components/sections/Services';
 import Experience from '@/components/sections/Experience';
 import Projects from '@/components/sections/Projects';
 import Skills from '@/components/sections/Skills';
+import Gaming from '@/components/sections/Gaming';
 import Contact from '@/components/sections/Contact';
 import data from '@/data/portfolio.json';
 import type { PortfolioData } from '@/types/portfolio';
@@ -24,6 +25,7 @@ export default function Home() {
         <Experience experiences={experiences} />
         <Projects projects={projects} />
         <Skills skills={skills} />
+        <Gaming />
         <Contact
           email={about.email}
           location={about.location}

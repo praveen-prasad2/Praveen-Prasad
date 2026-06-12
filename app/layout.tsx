@@ -16,9 +16,14 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Praveen Prasad — Portfolio',
+  title: 'Praveen Prasad — The Best Software Engineer in the World',
   description:
     'Full-stack developer turning ideas into digital reality. Websites, products, and businesses that solve problems and generate results.',
+  icons: {
+    icon: '/uploads/logo.svg',
+    shortcut: '/uploads/logo.svg',
+    apple: '/uploads/logo.svg',
+  },
 }
 
 export default function RootLayout({
@@ -28,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${anton.variable} ${poppins.variable}`}>
-      <body className="min-h-screen bg-bg font-poppins text-white antialiased">
+      <body className="min-h-screen bg-bg font-poppins text-accent antialiased">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

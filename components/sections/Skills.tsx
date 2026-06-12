@@ -48,7 +48,7 @@ export default function Skills({ skills }: { skills: Skill[] }) {
             <Reveal key={group.category} delay={i * 80}>
               <div className="card h-full transition hover:border-primary/30">
                 <h3 className="heading-md !text-lg text-primary">{group.category}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-white/75">
+                <p className="mt-4 text-sm leading-relaxed text-accent/75">
                   {group.items.join(' • ')}
                 </p>
               </div>

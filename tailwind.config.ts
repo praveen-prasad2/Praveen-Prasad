@@ -9,7 +9,8 @@ const config: Config = {
     extend: {
       colors: {
         bg: 'var(--color-bg)',
-        primary: 'var(--color-primary)',
+        primary: 'rgb(var(--color-primary-rgb) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent-rgb) / <alpha-value>)',
       },
       fontFamily: {
         anton: ['var(--font-anton)', 'sans-serif'],

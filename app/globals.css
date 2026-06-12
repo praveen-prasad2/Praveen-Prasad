@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #052210;
-  --color-primary: #4adb26;
+  --color-bg: #000000;
+  --color-primary: #c00510;
+  --color-primary-rgb: 192 5 16;
+  --color-accent: #ffffff;
+  --color-accent-rgb: 255 255 255;
   --section-y: clamp(5rem, 10vw, 8rem);
 }
 
@@ -23,13 +26,13 @@ html.lenis body {
 
 body {
   background-color: var(--color-bg);
-  color: #ffffff;
+  color: var(--color-accent);
   overflow-x: clip;
 }
 
 ::selection {
   background: var(--color-primary);
-  color: var(--color-bg);
+  color: var(--color-accent);
 }
 
 ::-webkit-scrollbar {
@@ -55,19 +58,19 @@ body {
   }
 
   .section {
-    @apply border-t border-white/10 py-[var(--section-y)];
+    @apply border-t border-primary/20 py-[var(--section-y)];
   }
 
   .heading-xl {
-    @apply font-anton text-4xl uppercase leading-tight tracking-wide text-white sm:text-5xl md:text-6xl lg:text-7xl;
+    @apply font-anton text-4xl uppercase leading-tight tracking-wide text-accent sm:text-5xl md:text-6xl lg:text-7xl;
   }
 
   .heading-lg {
-    @apply font-anton text-3xl uppercase tracking-wide text-white sm:text-4xl md:text-5xl;
+    @apply font-anton text-3xl uppercase tracking-wide text-accent sm:text-4xl md:text-5xl;
   }
 
   .heading-md {
-    @apply font-anton text-xl tracking-wide text-white sm:text-2xl;
+    @apply font-anton text-xl tracking-wide text-accent sm:text-2xl;
   }
 
   .label {
@@ -75,22 +78,22 @@ body {
   }
 
   .body {
-    @apply text-base leading-relaxed text-white/80 md:text-lg;
+    @apply text-base leading-relaxed text-accent/80 md:text-lg;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-bg transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-accent transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:border-primary hover:text-primary hover:scale-[1.02] active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-accent transition hover:border-primary hover:text-primary hover:scale-[1.02] active:scale-[0.98];
   }
 
   .card {
-    @apply rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm md:p-6;
+    @apply rounded-2xl border border-primary/20 bg-white/5 p-5 backdrop-blur-sm md:p-6;
   }
 
   .tag {
-    @apply rounded-full border border-white/15 px-3 py-1 text-xs font-medium text-white/70;
+    @apply rounded-full border border-primary/30 px-3 py-1 text-xs font-medium text-accent/70;
   }
 }

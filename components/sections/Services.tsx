@@ -35,12 +35,12 @@ export default function Services({ services }: { services: Service[] }) {
             const Icon = ICONS[service.icon] ?? Rocket;
             return (
               <Reveal key={service.id} delay={i * 80}>
-                <article className="card group h-full transition hover:-translate-y-1 hover:border-primary/30 hover:bg-white/5">
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary transition group-hover:bg-primary group-hover:text-bg">
+                <article className="card group h-full transition hover:-translate-y-1 hover:border-primary/30 hover:bg-primary/5">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary transition group-hover:bg-primary group-hover:text-accent">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="heading-md !text-lg">{service.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/70">
+                  <p className="mt-3 text-sm leading-relaxed text-accent/70">
                     {service.description}
                   </p>
                 </article>

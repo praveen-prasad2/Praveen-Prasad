@@ -27,7 +27,7 @@ export default function Contact({
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="body mt-6 text-white/80">
+            <p className="body mt-6">
               Most great products begin with a conversation. Whether you need a
               website, a web application, or someone to help bring your idea to life,
               let&apos;s connect.
@@ -50,7 +50,7 @@ export default function Contact({
                 {email}
               </a>
 
-              <p className="flex items-center gap-3 text-white/70">
+              <p className="flex items-center gap-3 text-accent/70">
                 <MapPin className="h-5 w-5 text-primary" />
                 {location}
               </p>

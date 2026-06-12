@@ -34,26 +34,26 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 >
                   <div className="flex-1">
                     <div className="flex items-start gap-4">
-                      <span className="font-anton text-2xl text-primary/40">
+                      <span className="font-anton text-2xl text-accent/40">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <div>
                         <h3 className="heading-md group-hover:text-primary transition">
                           {project.title}
                         </h3>
-                        <p className="body mt-3 !text-base text-white/75">
+                        <p className="body mt-3 !text-base">
                           {project.description}
                         </p>
                         {extras && (
-                          <div className="mt-4 space-y-1 text-sm text-white/60">
+                          <div className="mt-4 space-y-1 text-sm text-accent/60">
                             {extras.problem && (
                               <p>
-                                <span className="text-primary">Problem:</span> {extras.problem}
+                                <span className="text-accent">Problem:</span> {extras.problem}
                               </p>
                             )}
                             {extras.solution && (
                               <p>
-                                <span className="text-primary">Solution:</span> {extras.solution}
+                                <span className="text-accent">Solution:</span> {extras.solution}
                               </p>
                             )}
                           </div>
