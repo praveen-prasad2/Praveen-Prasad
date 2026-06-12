@@ -19,7 +19,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       const id = anchor.getAttribute('href');
       if (!id || id === '#') return;
 
-      const el = document.querySelector(id);
+      const el = document.getElementById(id.slice(1));
       if (!el) return;
 
       e.preventDefault();
