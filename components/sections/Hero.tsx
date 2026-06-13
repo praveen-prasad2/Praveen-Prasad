@@ -1,6 +1,7 @@
 import type { About } from '@/types/portfolio';
 import { ArrowDown } from 'lucide-react';
 import BlurText from '@/components/ui/BlurText';
+import RippleGrid from '@/components/ui/RippleGrid';
 import Reveal from '@/components/ui/Reveal';
 
 export default function Hero({ about }: { about: About }) {
@@ -8,9 +9,18 @@ export default function Hero({ about }: { about: About }) {
 
   return (
     <section id="hero" className="relative flex min-h-screen flex-col justify-center items-center pt-24">
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -right-32 top-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute -left-20 bottom-1/4 h-72 w-72 rounded-full bg-primary/5 blur-3xl" />
+      <div className="absolute inset-0 overflow-hidden">
+        <RippleGrid
+          enableRainbow={false}
+          gridColor="#c00510"
+          rippleIntensity={0.05}
+          gridSize={10}
+          gridThickness={15}
+          mouseInteraction={true}
+          mouseInteractionRadius={1.2}
+          opacity={0.6}
+          glowIntensity={0.15}
+        />
       </div>
 
       <div className="container-main relative flex flex-col items-center text-center">
