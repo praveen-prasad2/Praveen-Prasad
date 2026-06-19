@@ -2,6 +2,10 @@
 
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -10,6 +14,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+
+    lenis.on('scroll', ScrollTrigger.update);
 
     const onAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -28,15 +34,14 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     document.addEventListener('click', onAnchorClick);
 
-    let raf = 0;
     const tick = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(tick);
+      lenis.raf(time * 1000);
     };
-    raf = requestAnimationFrame(tick);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(raf);
+      gsap.ticker.remove(tick);
       document.removeEventListener('click', onAnchorClick);
       lenis.destroy();
     };

@@ -44,6 +44,17 @@ body {
   border-radius: 4px;
 }
 
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-anton), sans-serif;
+  }
+}
+
 @layer components {
   .font-anton {
     font-family: var(--font-anton), sans-serif;
@@ -74,19 +85,19 @@ body {
   }
 
   .label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-primary;
+    @apply font-poppins text-xs font-semibold uppercase tracking-[0.2em] text-primary;
   }
 
   .body {
-    @apply text-base leading-relaxed text-accent/80 md:text-lg;
+    @apply font-poppins text-base leading-relaxed text-accent/80 md:text-lg;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-accent transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98];
+    @apply font-poppins inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-accent transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-accent transition hover:border-primary hover:text-primary hover:scale-[1.02] active:scale-[0.98];
+    @apply font-poppins inline-flex items-center justify-center gap-2 rounded-full border border-primary/40 px-6 py-3 text-sm font-semibold text-accent transition hover:border-primary hover:text-primary hover:scale-[1.02] active:scale-[0.98];
   }
 
   .card {
@@ -94,6 +105,84 @@ body {
   }
 
   .tag {
-    @apply rounded-full border border-primary/30 px-3 py-1 text-xs font-medium text-accent/70;
+    @apply font-poppins rounded-full border border-primary/30 px-3 py-1 text-xs font-medium text-accent/70;
   }
+}
+
+[data-section-theme='dark'] {
+  background-color: var(--color-bg);
+  color: var(--color-accent);
+}
+
+[data-section-theme='red'] {
+  background-color: var(--color-primary);
+  color: var(--color-accent);
+}
+
+[data-section-theme='red'] .heading-lg,
+[data-section-theme='red'] .heading-md,
+[data-section-theme='red'] .heading-xl,
+[data-section-theme='red'] .body,
+[data-section-theme='red'] .label,
+[data-section-theme='red'] .text-primary,
+[data-section-theme='red'] [class*='text-accent'] {
+  color: #ffffff !important;
+}
+
+[data-section-theme='red'] .card {
+  border-color: rgb(255 255 255 / 0.25);
+  background-color: rgb(0 0 0 / 0.15);
+}
+
+[data-section-theme='red'] .tag {
+  border-color: rgb(255 255 255 / 0.35);
+  color: rgb(255 255 255 / 0.85);
+}
+
+[data-section-theme='red'] .btn-ghost {
+  border-color: rgb(255 255 255 / 0.5);
+  color: #ffffff;
+}
+
+[data-section-theme='red'] .btn-ghost:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+[data-section-theme='light'] {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+[data-section-theme='light'] .heading-lg,
+[data-section-theme='light'] .heading-md,
+[data-section-theme='light'] .heading-xl,
+[data-section-theme='light'] .body,
+[data-section-theme='light'] [class*='text-accent'] {
+  color: #000000 !important;
+}
+
+[data-section-theme='light'] .label,
+[data-section-theme='light'] .text-primary {
+  color: var(--color-primary) !important;
+}
+
+[data-section-theme='light'] .card {
+  border-color: rgb(192 5 16 / 0.25);
+  background-color: rgb(0 0 0 / 0.04);
+}
+
+[data-section-theme='light'] .tag {
+  border-color: rgb(192 5 16 / 0.35);
+  color: rgb(0 0 0 / 0.7);
+}
+
+[data-section-theme='light'] .btn-ghost {
+  border-color: rgb(192 5 16 / 0.5);
+  color: #000000;
+}
+
+[data-section-theme='light'] .btn-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }

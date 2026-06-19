@@ -1,4 +1,5 @@
 import Navbar from '@/components/layout/Navbar';
+import StickyScrollLayout from '@/components/layout/StickyScrollLayout';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Services from '@/components/sections/Services';
@@ -18,7 +19,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <StickyScrollLayout>
         <Hero about={about} />
         <About />
         <Services services={services} />
@@ -31,7 +32,7 @@ export default function Home() {
           location={about.location}
           socials={about.socials}
         />
-      </main>
+      </StickyScrollLayout>
     </>
   );
 }

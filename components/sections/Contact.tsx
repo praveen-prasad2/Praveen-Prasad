@@ -35,7 +35,7 @@ export default function Contact({
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="mt-8 font-anton text-2xl text-primary md:text-3xl">
+            <p className="mt-8 font-poppins text-2xl font-semibold text-primary md:text-3xl">
               Let&apos;s Build Something Worth Remembering.
             </p>
           </Reveal>

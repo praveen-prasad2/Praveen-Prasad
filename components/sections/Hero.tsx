@@ -1,28 +1,13 @@
 import type { About } from '@/types/portfolio';
 import { ArrowDown } from 'lucide-react';
 import BlurText from '@/components/ui/BlurText';
-import RippleGrid from '@/components/ui/RippleGrid';
 import Reveal from '@/components/ui/Reveal';
 
 export default function Hero({ about }: { about: About }) {
   const firstName = about.name.split(' ')[0];
 
   return (
-    <section id="hero" className="relative flex min-h-screen flex-col justify-center items-center pt-24">
-      <div className="absolute inset-0 overflow-hidden">
-        <RippleGrid
-          enableRainbow={false}
-          gridColor="#c00510"
-          rippleIntensity={0.05}
-          gridSize={10}
-          gridThickness={15}
-          mouseInteraction={true}
-          mouseInteractionRadius={1.2}
-          opacity={0.6}
-          glowIntensity={0.15}
-        />
-      </div>
-
+    <section id="hero" className="relative flex min-h-full flex-col justify-center items-center pt-24">
       <div className="container-main relative flex flex-col items-center text-center">
         <Reveal>
           <p className="label"></p>
@@ -34,7 +19,7 @@ export default function Hero({ about }: { about: About }) {
           delay={120}
           animateBy="words"
           direction="top"
-          className="mx-auto mt-6 max-w-4xl justify-center text-8xl font-bold font-poppins text-accent"
+          className="mx-auto mt-6 max-w-4xl justify-center font-anton text-8xl font-bold text-accent"
         />
 
         <BlurText
@@ -43,7 +28,7 @@ export default function Hero({ about }: { about: About }) {
           animateBy="words"
           direction="top"
           threshold={0.5}
-          className="mx-auto mt-8 max-w-2xl justify-center text-lg text-accent/85 md:text-xl"
+          className="mx-auto mt-8 max-w-2xl justify-center font-poppins text-lg text-accent/85 md:text-xl"
         />
 {/* 
         <Reveal delay={300}>
@@ -63,7 +48,7 @@ export default function Hero({ about }: { about: About }) {
           delay={100}
           animateBy="words"
           direction="bottom"
-          className="mt-10 justify-center font-anton text-lg tracking-wide text-primary md:text-xl"
+          className="mt-10 justify-center font-poppins text-lg font-medium tracking-wide text-primary md:text-xl"
         />
 
         <Reveal delay={500}>

@@ -37,7 +37,7 @@ export default function Gaming() {
                   <Gamepad2 className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-accent/90">{game.title}</h3>
+                  <h3 className="heading-md !text-base">{game.title}</h3>
                   <span className="tag mt-2 inline-block !px-2 !py-0.5 text-xs">
                     {game.genre}
                   </span>
