@@ -50,10 +50,19 @@ export interface Service {
   icon: string;
 }
 
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+}
+
 export interface PortfolioData {
   about: About;
   skills: Skill[];
   experiences: Experience[];
   projects: Project[];
   services?: Service[];
+  testimonials?: Testimonial[];
 }

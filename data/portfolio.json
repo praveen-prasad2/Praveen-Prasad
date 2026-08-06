@@ -249,5 +249,28 @@
       "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB"],
       "link": "https://rheinlandconsultancy.com/"
     }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "name": "Aisha Rahman",
+      "role": "Founder",
+      "company": "Product Share",
+      "quote": "Praveen translated a rough idea into a shipping SaaS product. Clean architecture, sharp UI, and zero hand-holding required."
+    },
+    {
+      "id": "2",
+      "name": "Rahul Menon",
+      "role": "CTO",
+      "company": "Beegains",
+      "quote": "Reliable engineer who thinks beyond tickets. He improved performance, ownership, and product polish on every project."
+    },
+    {
+      "id": "3",
+      "name": "Sophie Keller",
+      "role": "Managing Director",
+      "company": "Rheinland Consultancy",
+      "quote": "Professional, responsive, and design-aware. Our platform feels modern and trustworthy — exactly what we needed."
+    }
   ]
 }

@@ -8,13 +8,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: 'var(--color-bg)',
+        bg: {
+          DEFAULT: 'rgb(var(--color-bg-rgb) / <alpha-value>)',
+          secondary: 'rgb(var(--color-bg-secondary-rgb) / <alpha-value>)',
+        },
         primary: 'rgb(var(--color-primary-rgb) / <alpha-value>)',
         accent: 'rgb(var(--color-accent-rgb) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted-rgb) / <alpha-value>)',
       },
       fontFamily: {
-        anton: ['var(--font-anton)', 'sans-serif'],
-        poppins: ['var(--font-poppins)', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+      },
+      boxShadow: {
+        glow: '0 0 24px rgba(0, 255, 136, 0.15)',
+        'glow-sm': '0 0 12px rgba(0, 255, 136, 0.12)',
+        'glow-lg': '0 0 40px rgba(0, 255, 136, 0.18)',
+      },
+      backgroundImage: {
+        'grid-fade':
+          'linear-gradient(to bottom, transparent, var(--color-bg) 90%)',
       },
     },
   },
