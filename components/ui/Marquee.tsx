@@ -14,7 +14,7 @@ export default function Marquee({
   return (
     <div
       className={cn(
-        'relative overflow-hidden border-y border-primary/10 bg-bg-secondary/40 py-4',
+        'relative overflow-hidden border-y border-white/[0.06] bg-bg-surface/40 py-4',
         className
       )}
       aria-hidden
@@ -25,9 +25,9 @@ export default function Marquee({
         {doubled.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="inline-flex shrink-0 items-center gap-3 font-mono text-sm tracking-wide text-white/50"
+            className="inline-flex shrink-0 items-center gap-3 font-mono text-sm tracking-wide text-ink-muted"
           >
-            <span className="h-1 w-1 rounded-full bg-primary/60 shadow-glow-sm" />
+            <span className="h-1 w-1 rounded-full bg-mint shadow-glow-mint" />
             {item}
           </span>
         ))}

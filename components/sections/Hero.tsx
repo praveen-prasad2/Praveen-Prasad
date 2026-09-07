@@ -6,34 +6,43 @@ import { ArrowDown } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticButton from '@/components/ui/MagneticButton';
-import TerminalType from '@/components/ui/TerminalType';
+import KineticHeading from '@/components/ui/KineticHeading';
 import Reveal from '@/components/ui/Reveal';
+import HeroScene from '@/components/effects/HeroScene';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero({ about }: { about: About }) {
-  const firstName = about.name.split(' ')[0];
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const content = contentRef.current;
-    const title = titleRef.current;
+    const scene = sceneRef.current;
     if (!section || !content) return;
 
+    // Force a clean slate regardless of any tween left over from a prior run
+    // (React 18 Strict Mode double-invokes this effect on initial mount).
+    const targets = scene ? [content, scene] : [content];
+    gsap.killTweensOf(targets);
+    ScrollTrigger.getAll().forEach((st) => {
+      if (st.trigger === section) st.kill();
+    });
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(targets, { clearProps: 'transform,filter,opacity' });
       return;
     }
 
-    const ctx = gsap.context(() => {
-      // Main content: zoom + fade as user scrolls out of hero
+    const tweens: gsap.core.Tween[] = [];
+
+    tweens.push(
       gsap.to(content, {
-        scale: 1.18,
+        y: -60,
         opacity: 0,
-        y: -48,
-        filter: 'blur(6px)',
+        filter: 'blur(4px)',
         ease: 'none',
         scrollTrigger: {
           trigger: section,
@@ -41,25 +50,33 @@ export default function Hero({ about }: { about: About }) {
           end: 'bottom top',
           scrub: true,
         },
-      });
+      })
+    );
 
-      // Headline zooms slightly more for depth
-      if (title) {
-        gsap.to(title, {
-          scale: 1.12,
-          letterSpacing: '-0.04em',
+    // Background scene drifts/fades slower than the text for a sense of depth.
+    if (scene) {
+      tweens.push(
+        gsap.to(scene, {
+          y: -24,
+          opacity: 0,
+          scale: 1.08,
           ease: 'none',
           scrollTrigger: {
             trigger: section,
             start: 'top top',
-            end: '65% top',
+            end: 'bottom top',
             scrub: true,
           },
-        });
-      }
-    }, section);
+        })
+      );
+    }
 
-    return () => ctx.revert();
+    return () => {
+      tweens.forEach((tween) => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      });
+    };
   }, []);
 
   return (
@@ -68,91 +85,58 @@ export default function Hero({ about }: { about: About }) {
       id="hero"
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-24 pb-16"
     >
-      <div
-        ref={contentRef}
-        className="container-main relative origin-center will-change-transform"
-      >
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <div>
-            <Reveal>
-              <p className="label">system://identity</p>
-            </Reveal>
+      <div ref={sceneRef} className="absolute inset-0 z-0 will-change-transform">
+        <HeroScene />
+      </div>
 
-            <Reveal delay={80}>
-              <h1 ref={titleRef} className="heading-xl mt-5 origin-left">
-                <span className="text-white">{firstName}</span>{' '}
-                <span className="text-primary text-glow">
-                  {about.name.split(' ').slice(1).join(' ')}
-                </span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <p className="mt-3 font-mono text-sm text-primary/70 md:text-base">
-                {about.title.toLowerCase().replace(/\s+/g, '_')}
-                <span className="text-muted"> // status: available</span>
-              </p>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <p className="body mt-6 max-w-xl">
-                I build websites, products, and businesses — not just pages.
-                Digital experiences engineered to solve problems and generate
-                results.
-              </p>
-            </Reveal>
-
-            <Reveal delay={280}>
-              <p className="mt-4 font-mono text-sm text-white/50">
-                Developer. Problem Solver. Creator.
-              </p>
-            </Reveal>
-
-            <Reveal delay={360}>
-              <div className="mt-10 flex flex-wrap gap-3">
-                <MagneticButton href="#projects" className="btn-solid">
-                  Explore Work
-                </MagneticButton>
-                <MagneticButton href="#contact" className="btn-ghost">
-                  Start a Project
-                </MagneticButton>
-              </div>
-            </Reveal>
+      <div ref={contentRef} className="container-main relative z-10 will-change-transform">
+        <Reveal>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+            </span>
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
+              Full-stack developer · available
+            </span>
           </div>
+        </Reveal>
 
-          <Reveal delay={200} direction="left">
-            <div className="gradient-border relative overflow-hidden rounded-sm border border-primary/15 bg-bg-secondary/70 p-5 shadow-glow-sm backdrop-blur-md md:p-6">
-              <div className="mb-4 flex items-center gap-2 border-b border-primary/10 pb-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/40" />
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/25" />
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/15" />
-                <span className="ml-2 font-mono text-[11px] tracking-wider text-muted">
-                  terminal — session_01
-                </span>
-              </div>
-              <TerminalType
-                lines={[
-                  `$ whoami`,
-                  `> ${about.name}`,
-                  `$ cat mission.txt`,
-                  `> Build systems that scale.`,
-                  `> Ship interfaces that convert.`,
-                  `> Automate what slows teams down.`,
-                  `$ status`,
-                  `> online — ready to collaborate_`,
-                ]}
-              />
-            </div>
-          </Reveal>
-        </div>
+        <KineticHeading as="h1" delay={120} className="heading-xl mt-6">
+          {about.name}
+        </KineticHeading>
+
+        <Reveal delay={520}>
+          <p className="body mt-7 max-w-2xl">
+            I build websites, products, and businesses — not just pages. Digital
+            experiences engineered to solve problems and generate results.
+          </p>
+        </Reveal>
+
+        <Reveal delay={600}>
+          <p className="mt-4 font-mono text-sm text-ink-muted">
+            Developer. Problem Solver. Creator.
+          </p>
+        </Reveal>
+
+        <Reveal delay={680}>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <MagneticButton href="#projects" className="btn-solid">
+              Explore Work
+            </MagneticButton>
+            <MagneticButton href="#contact" className="btn-ghost">
+              Start a Project
+            </MagneticButton>
+          </div>
+        </Reveal>
       </div>
 
       <a
         href="#about"
-        className="container-main mt-16 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-muted transition hover:text-primary"
+        className="container-main mt-16 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-muted transition hover:text-accent"
         aria-label="Scroll to about"
       >
-        <ArrowDown className="h-4 w-4 animate-bounce text-primary" />
+        <ArrowDown className="h-4 w-4 animate-bounce text-accent" />
         scroll
       </a>
     </section>

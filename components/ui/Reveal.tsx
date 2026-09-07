@@ -1,66 +1,79 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/cn';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const OFFSETS: Record<string, { x?: number; y?: number }> = {
+  up: { y: 28 },
+  down: { y: -28 },
+  left: { x: 28 },
+  right: { x: -28 },
+  none: {},
+};
 
 export default function Reveal({
   children,
   className,
   delay = 0,
   direction = 'up',
+  scale,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+  scale?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    // Force a clean slate regardless of any tween left over from a prior run
+    // (React 18 Strict Mode double-invokes this effect in dev).
+    gsap.killTweensOf(el);
+    ScrollTrigger.getAll().forEach((st) => {
+      if (st.trigger === el) st.kill();
+    });
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setVisible(true);
+      gsap.set(el, { clearProps: 'transform', opacity: 1 });
       return;
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    const offset = OFFSETS[direction] ?? OFFSETS.up;
+    const tween = gsap.fromTo(
+      el,
+      { opacity: 0, x: 0, y: 0, ...offset, scale: scale ?? 1 },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        delay: delay / 1000,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+      }
     );
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const hidden =
-    direction === 'up'
-      ? 'translate-y-8'
-      : direction === 'down'
-        ? '-translate-y-8'
-        : direction === 'left'
-          ? 'translate-x-8'
-          : direction === 'right'
-            ? '-translate-x-8'
-            : '';
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, [delay, direction, scale]);
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        'transition-all duration-700 ease-out',
-        visible ? 'translate-x-0 translate-y-0 opacity-100' : `opacity-0 ${hidden}`,
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+    <div ref={ref} className={cn('will-change-transform', className)}>
       {children}
     </div>
   );

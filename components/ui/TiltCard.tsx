@@ -12,7 +12,7 @@ import { cn } from '@/lib/cn';
 export default function TiltCard({
   children,
   className,
-  maxTilt = 8,
+  maxTilt = 7,
 }: {
   children: ReactNode;
   className?: string;
@@ -35,8 +35,8 @@ export default function TiltCard({
       const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = (e.clientY - rect.top) / rect.height;
-      const rotX = (0.5 - y) * maxTilt * 2;
-      const rotY = (x - 0.5) * maxTilt * 2;
+      const rotX = (0.5 - y) * maxTilt;
+      const rotY = (x - 0.5) * maxTilt;
       setStyle({
         transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`,
         transition: 'transform 0.08s ease-out',

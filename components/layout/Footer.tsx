@@ -1,10 +1,12 @@
 import type { SocialLink } from '@/types/portfolio';
 import { Github, Instagram, Linkedin } from 'lucide-react';
+import XLogo from '@/components/ui/XLogo';
 
-const SOCIAL_ICONS: Record<string, typeof Linkedin> = {
+const SOCIAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   linkedin: Linkedin,
   github: Github,
   instagram: Instagram,
+  x: XLogo,
 };
 
 export default function Footer({
@@ -17,16 +19,11 @@ export default function Footer({
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-primary/10 bg-bg-secondary/50">
+    <footer className="relative border-t border-white/[0.06]">
       <div className="container-main flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
-        <div className="text-center md:text-left">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-primary/70">
-            end_of_transmission
-          </p>
-          <p className="mt-2 font-sans text-sm text-muted">
-            © {year} {name}. Crafted with precision.
-          </p>
-        </div>
+        <p className="font-sans text-sm text-ink-muted">
+          © {year} {name}. Crafted with precision.
+        </p>
 
         <div className="flex items-center gap-3">
           {socials.map((social) => {
@@ -37,7 +34,7 @@ export default function Footer({
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-sm border border-primary/15 text-muted transition hover:border-primary/40 hover:text-primary hover:shadow-glow-sm"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-ink-muted transition hover:border-accent/40 hover:text-accent"
                 aria-label={social.platform}
               >
                 <Icon className="h-4 w-4" />

@@ -1,4 +1,5 @@
 import Reveal from '@/components/ui/Reveal';
+import KineticHeading from '@/components/ui/KineticHeading';
 import Counter from '@/components/ui/Counter';
 
 const DRIVERS = [
@@ -16,14 +17,11 @@ export default function About() {
         <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
           <div>
             <Reveal>
-              <p className="label">// about</p>
+              <p className="eyebrow">About</p>
             </Reveal>
-            <Reveal delay={80}>
-              <h2 className="heading-lg mt-4">
-                More than just a{' '}
-                <span className="text-primary">developer</span>
-              </h2>
-            </Reveal>
+            <KineticHeading as="h2" delay={80} className="heading-lg mt-4">
+              More than just a <span className="text-accent">developer</span>
+            </KineticHeading>
             <Reveal delay={140}>
               <p className="body mt-6">
                 My journey didn&apos;t start with code. It started with curiosity —
@@ -48,7 +46,7 @@ export default function About() {
 
           <div>
             <Reveal delay={100}>
-              <div className="grid grid-cols-3 gap-4 rounded-sm border border-primary/10 bg-bg-secondary/60 p-6 backdrop-blur-md">
+              <div className="grid grid-cols-3 gap-4 rounded-2xl border border-white/[0.08] bg-bg-surface/60 p-6 backdrop-blur-md">
                 <Counter value={2} suffix="+" label="Years exp" />
                 <Counter value={10} suffix="+" label="Projects" />
                 <Counter value={18} suffix="+" label="Technologies" />
@@ -56,23 +54,20 @@ export default function About() {
             </Reveal>
 
             <Reveal delay={180}>
-              <h3 className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-primary">
-                what_drives_me
+              <h3 className="mt-10 font-mono text-xs uppercase tracking-[0.25em] text-accent">
+                What drives me
               </h3>
-              <ul className="mt-5 space-y-3">
-                {DRIVERS.map((item, i) => (
-                  <li
-                    key={item}
-                    className="card-glow group flex items-center gap-3 !p-3.5"
-                  >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-primary/25 font-mono text-xs text-primary transition group-hover:bg-primary/10">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-sm text-white/80">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </Reveal>
+            <ul className="mt-5 space-y-3">
+              {DRIVERS.map((item, i) => (
+                <Reveal key={item} delay={220 + i * 70} direction="left">
+                  <li className="card-glow group flex items-center gap-3 !p-3.5">
+                    <span className="h-px w-6 shrink-0 origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" />
+                    <span className="text-sm text-ink/80">{item}</span>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

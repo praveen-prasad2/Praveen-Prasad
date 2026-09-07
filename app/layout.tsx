@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk, JetBrains_Mono, Syne } from 'next/font/google'
+import { Sora, Inter, JetBrains_Mono } from 'next/font/google'
 import SmoothScroll from '@/components/providers/SmoothScroll'
+import CustomCursor from '@/components/ui/CustomCursor'
 import './globals.css'
 
-const syne = Syne({
+const sora = Sora({
   subsets: ['latin'],
   weight: ['500', '600', '700', '800'],
   variable: '--font-display',
 })
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
@@ -40,9 +41,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-bg font-sans text-accent antialiased">
+      <body className="min-h-screen bg-bg font-sans text-ink antialiased">
+        <a
+          href="#main"
+          className="fixed left-4 top-4 z-[999] -translate-y-24 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition-transform focus-visible:translate-y-0"
+        >
+          Skip to content
+        </a>
+        <CustomCursor />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

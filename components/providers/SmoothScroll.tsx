@@ -9,13 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    let lenis: Lenis | null = null;
 
     const onAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -29,13 +25,38 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       if (!el) return;
 
       e.preventDefault();
-      lenis.scrollTo(el, { offset: -80 });
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -80 });
+      } else {
+        el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }
     };
 
     document.addEventListener('click', onAnchorClick);
 
+    // Webfont swap (Sora/Inter loading in) shifts layout after individual
+    // sections have already computed their ScrollTrigger start/end positions —
+    // recalculate once fonts are actually in place so nothing is left stuck
+    // mid-animation waiting on a scroll event that never revisits it.
+    document.fonts?.ready.then(() => ScrollTrigger.refresh()).catch(() => {});
+
+    // Reduced motion / touch: skip Lenis smoothing entirely, keep native scroll + ScrollTrigger.
+    if (reduceMotion || coarsePointer) {
+      return () => document.removeEventListener('click', onAnchorClick);
+    }
+
+    const instance = new Lenis({
+      duration: 1.1,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      syncTouch: false,
+    });
+    lenis = instance;
+
+    instance.on('scroll', ScrollTrigger.update);
+
     const tick = (time: number) => {
-      lenis.raf(time * 1000);
+      instance.raf(time * 1000);
     };
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
@@ -43,7 +64,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     return () => {
       gsap.ticker.remove(tick);
       document.removeEventListener('click', onAnchorClick);
-      lenis.destroy();
+      instance.destroy();
     };
   }, []);
 

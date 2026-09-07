@@ -1,14 +1,18 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/cn';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Counter({
   value,
   suffix = '',
   label,
   className,
-  duration = 1600,
+  duration = 1.6,
 }: {
   value: number;
   suffix?: string;
@@ -16,47 +20,47 @@ export default function Counter({
   className?: string;
   duration?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [count, setCount] = useState(0);
-  const started = useRef(false);
+  const numberRef = useRef<HTMLParagraphElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const numberEl = numberRef.current;
+    const wrapEl = wrapRef.current;
+    if (!numberEl || !wrapEl) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            setCount(value);
-            return;
-          }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      numberEl.textContent = `${value}${suffix}`;
+      return;
+    }
 
-          const start = performance.now();
-          const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.round(value * eased));
-            if (progress < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.4 }
-    );
+    const counter = { val: 0 };
+    const ctx = gsap.context(() => {
+      gsap.to(counter, {
+        val: value,
+        duration,
+        ease: 'power2.out',
+        onUpdate: () => {
+          numberEl.textContent = `${Math.round(counter.val)}${suffix}`;
+        },
+        scrollTrigger: {
+          trigger: wrapEl,
+          start: 'top 85%',
+        },
+      });
+    }, wrapEl);
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [value, duration]);
+    return () => ctx.revert();
+  }, [value, suffix, duration]);
 
   return (
-    <div ref={ref} className={cn('text-center', className)}>
-      <p className="font-display text-3xl font-semibold text-primary text-glow md:text-4xl">
-        {count}
-        {suffix}
+    <div ref={wrapRef} className={cn('text-center', className)}>
+      <p
+        ref={numberRef}
+        className="font-display text-3xl font-semibold text-accent text-glow md:text-4xl"
+      >
+        0{suffix}
       </p>
-      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-muted">
         {label}
       </p>
     </div>

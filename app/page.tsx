@@ -1,9 +1,8 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import CyberBackground from '@/components/effects/CyberBackground';
+import AmbientBackground from '@/components/effects/AmbientBackground';
 import ScrollProgress from '@/components/effects/ScrollProgress';
-import HackerLoader from '@/components/effects/HackerLoader';
-import SectionDivider from '@/components/ui/SectionDivider';
+import Preloader from '@/components/effects/Preloader';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Skills from '@/components/sections/Skills';
@@ -29,26 +28,19 @@ export default function Home() {
 
   return (
     <>
-      <HackerLoader />
+      <Preloader />
       <ScrollProgress />
-      <CyberBackground />
+      <AmbientBackground />
       <Navbar />
 
-      <main className="relative z-10">
+      <main id="main" className="relative z-10">
         <Hero about={about} />
-        <SectionDivider />
         <About />
-        <SectionDivider />
         <Skills skills={skills} />
-        <SectionDivider />
         <Experience experiences={experiences} />
-        <SectionDivider />
         <Projects projects={projects} />
-        <SectionDivider />
         <Services services={services} />
-        <SectionDivider />
         <Testimonials testimonials={testimonials} />
-        <SectionDivider />
         <Contact
           email={about.email}
           location={about.location}
