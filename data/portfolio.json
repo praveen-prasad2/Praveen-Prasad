@@ -2,7 +2,7 @@
   "about": {
     "name": "Praveen Prasad",
     "title": "Full Stack Developer",
-    "bio": "Dedicated full-stack web developer with strong skills in Next.js, React, TypeScript, Node.js, WordPress, and automation tools like n8n. Self-driven and committed to continuous learning, I combine technical expertise with strong leadership qualities to build scalable applications, guide teams, and deliver clean, user-focused solutions.",
+    "bio": "Full-stack developer based in Malappuram, Kerala. I build considered interfaces, connected web applications, and practical automations with React, Next.js, TypeScript, Node.js, and n8n. My approach is hands-on: understand the problem, make it work, and refine the details.",
     "email": "praveenprasad2510@gmail.com",
     "location": "Malappuram,Kerala",
     "avatar": "",
@@ -171,53 +171,63 @@
       "title": "Senior Frontend Developer",
       "company": "Beegains Technology Solutions LLP,Malappuram",
       "period": "Oct 2024 - Present",
-      "description": "Built modern, scalable web applications using Next.js and TypeScript (self-learned). I also worked on full-stack features and created workflow automations using n8n (self-learned).",
-      "technologies": ["Next.js", "TypeScript", "n8n", "Docker"]
+      "description": "Building web applications with Next.js and TypeScript, contributing full-stack features, and connecting workflows with n8n. I learned new tools as the work required and applied them to practical product needs.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "n8n",
+        "Docker"
+      ]
     },
     {
       "id": "2",
       "title": "Web Developer",
       "company": "Chimera, Trivandrum",
       "period": "June 2023 - Oct 2024",
-      "description": "Worked on building responsive, user-focused web solutions using React, Node.js, and WordPress. I contributed to both frontend and backend features, delivering efficient and scalable project implementations.",
-      "technologies": ["React", "Node.js", "MongoDB", "WordPress"]
+      "description": "Developed responsive websites and application features with React, Node.js, and WordPress. Worked across frontend and backend implementation to bring project requirements into usable web experiences.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "WordPress"
+      ]
     }
   ],
   "services": [
     {
       "id": "1",
-      "title": "Full-Stack Development",
-      "description": "End-to-end web applications with Next.js, React, TypeScript, and Node.js — from architecture to deployment.",
+      "title": "Web applications",
+      "description": "From the first screen to the API behind it: connected applications built with Next.js, React, TypeScript, and Node.js, with a structure that is straightforward to extend.",
       "icon": "code"
     },
     {
       "id": "2",
-      "title": "UI Engineering",
-      "description": "Pixel-perfect, accessible interfaces with Tailwind, Framer Motion, and design-system thinking.",
+      "title": "Interfaces & interaction",
+      "description": "Responsive layouts, purposeful motion, and accessible components. I translate a design into an interface that feels clear and behaves consistently.",
       "icon": "palette"
     },
     {
       "id": "3",
-      "title": "WordPress & CMS",
-      "description": "Custom themes, plugins, and performant content sites for brands and agencies.",
+      "title": "Content-driven websites",
+      "description": "WordPress themes, plugins, and content sites that give your team a practical way to publish and keep your website current.",
       "icon": "layout"
     },
     {
       "id": "4",
-      "title": "Workflow Automation",
-      "description": "n8n pipelines and integrations that connect APIs, CRMs, and internal tools.",
+      "title": "Connected workflows",
+      "description": "n8n automations that move information between APIs, CRMs, and internal tools, reducing the repetitive steps between systems.",
       "icon": "workflow"
     },
     {
       "id": "5",
-      "title": "E-commerce",
-      "description": "Shopify storefronts and checkout flows optimized for conversion and maintainability.",
+      "title": "Online storefronts",
+      "description": "Shopify storefronts and shopping flows that make products easy to explore, with an implementation your business can maintain.",
       "icon": "shopping"
     },
     {
       "id": "6",
-      "title": "Consulting & Leadership",
-      "description": "Technical guidance, code reviews, and team mentorship for shipping reliable products.",
+      "title": "Technical collaboration",
+      "description": "A second pair of eyes on architecture, code, and implementation decisions, plus hands-on guidance for teams working toward a release.",
       "icon": "users"
     }
   ],
@@ -225,7 +235,7 @@
     {
       "id": "1",
       "title": "Product Share",
-      "description": "Product Share is a simple SaaS platform that helps small entrepreneurs quickly create and share professional product catalogues.",
+      "description": "A SaaS platform that gives small entrepreneurs a straightforward way to create product catalogues and share them with customers.",
       "technologies": [
         "Next.js",
         "TypeScript",
@@ -238,15 +248,25 @@
     {
       "id": "2",
       "title": "Beegains Academy",
-      "description": "Beegains Academy is a modern website with a clean, engaging interface. It includes a backend admin dashboard for easy content and user management.",
-      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB"],
+      "description": "A learning-focused website paired with an admin dashboard, bringing a clear public experience and manageable content into one platform.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "MongoDB"
+      ],
       "link": "https://beegainsacademy.com/"
     },
     {
       "id": "3",
       "title": "Rheinland Consultancy",
-      "description": "Rheinland Consultancy is a Germany-based service that helps candidates in India find and apply for overseas job opportunities. It offers a simple and reliable pathway to global careers.",
-      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB"],
+      "description": "A web platform connecting candidates in India with overseas career opportunities through a Germany-based consultancy.",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "MongoDB"
+      ],
       "link": "https://rheinlandconsultancy.com/"
     }
   ],

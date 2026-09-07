@@ -9,62 +9,67 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointer = window.matchMedia('(pointer: coarse)');
     let lenis: Lenis | null = null;
+    let active = true;
 
-    const onAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
-      if (!anchor) return;
+    const tick = (time: number) => lenis?.raf(time * 1000);
+    const configure = () => {
+      gsap.ticker.remove(tick);
+      lenis?.destroy();
+      lenis = null;
+      if (!preference.matches && !pointer.matches) {
+        lenis = new Lenis({
+          duration: 1.15,
+          easing: (t: number) => 1 - Math.pow(1 - t, 4),
+          smoothWheel: true,
+          syncTouch: false,
+        });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(tick);
+      }
+      ScrollTrigger.refresh();
+    };
 
-      const id = anchor.getAttribute('href');
-      if (!id || id === '#') return;
-
-      const el = document.getElementById(id.slice(1));
-      if (!el) return;
-
-      e.preventDefault();
+    const onAnchorClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest<HTMLAnchorElement>('a[href^="#"]');
+      const hash = anchor?.getAttribute('href');
+      if (!hash || hash === '#') return;
+      const destination = document.getElementById(hash.slice(1));
+      if (!destination) return;
+      event.preventDefault();
+      window.history.replaceState(null, '', hash);
+      const focusDestination = () => {
+        const original = destination.getAttribute('tabindex');
+        if (original === null) destination.setAttribute('tabindex', '-1');
+        destination.focus({ preventScroll: true });
+        if (original === null) destination.removeAttribute('tabindex');
+      };
       if (lenis) {
-        lenis.scrollTo(el, { offset: -80 });
+        lenis.scrollTo(destination, { offset: destination.classList.contains('work-chapter') ? -96 : -24, onComplete: focusDestination });
       } else {
-        el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        destination.scrollIntoView({ behavior: preference.matches ? 'instant' : 'smooth', block: 'start' });
+        focusDestination();
       }
     };
 
+    configure();
+    preference.addEventListener('change', configure);
+    pointer.addEventListener('change', configure);
     document.addEventListener('click', onAnchorClick);
-
-    // Webfont swap (Sora/Inter loading in) shifts layout after individual
-    // sections have already computed their ScrollTrigger start/end positions —
-    // recalculate once fonts are actually in place so nothing is left stuck
-    // mid-animation waiting on a scroll event that never revisits it.
-    document.fonts?.ready.then(() => ScrollTrigger.refresh()).catch(() => {});
-
-    // Reduced motion / touch: skip Lenis smoothing entirely, keep native scroll + ScrollTrigger.
-    if (reduceMotion || coarsePointer) {
-      return () => document.removeEventListener('click', onAnchorClick);
-    }
-
-    const instance = new Lenis({
-      duration: 1.1,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      syncTouch: false,
-    });
-    lenis = instance;
-
-    instance.on('scroll', ScrollTrigger.update);
-
-    const tick = (time: number) => {
-      instance.raf(time * 1000);
-    };
-    gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    document.fonts?.ready.then(() => { if (active) ScrollTrigger.refresh(); }).catch(() => {});
 
     return () => {
-      gsap.ticker.remove(tick);
+      active = false;
+      preference.removeEventListener('change', configure);
+      pointer.removeEventListener('change', configure);
       document.removeEventListener('click', onAnchorClick);
-      instance.destroy();
+      gsap.ticker.remove(tick);
+      lenis?.destroy();
     };
   }, []);
 

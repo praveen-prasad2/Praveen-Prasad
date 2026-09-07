@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Sora, Inter, JetBrains_Mono } from 'next/font/google'
 import SmoothScroll from '@/components/providers/SmoothScroll'
-import CustomCursor from '@/components/ui/CustomCursor'
+
 import './globals.css'
 
 const sora = Sora({
@@ -25,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Praveen Prasad — Full Stack Developer',
   description:
-    'Full-stack developer building premium digital products, websites, and growth engines. Next.js, React, TypeScript, and automation.',
+    'Praveen Prasad is a full-stack developer in Kerala building thoughtful websites, connected applications, and practical automations with Next.js, React, TypeScript, and n8n.',
   icons: {
     icon: '/uploads/logo.svg',
     shortcut: '/uploads/logo.svg',
@@ -50,7 +50,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <CustomCursor />
+
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
