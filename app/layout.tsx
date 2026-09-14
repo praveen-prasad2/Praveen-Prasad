@@ -1,14 +1,11 @@
 import type { Metadata } from 'next'
-import { Sora, Inter, JetBrains_Mono } from 'next/font/google'
+import { Rye, Inter, JetBrains_Mono } from 'next/font/google'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 
 import './globals.css'
 
-const sora = Sora({
-  subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
-  variable: '--font-display',
-})
+
+const sora = Rye({ subsets: ['latin'], weight: '400', variable: '--font-display' })
 
 const inter = Inter({
   subsets: ['latin'],
@@ -56,3 +53,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+

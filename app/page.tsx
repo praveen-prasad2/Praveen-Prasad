@@ -1,65 +1,24 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, ArrowUp, Plus, Minus, Menu, X } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState } from 'react';
+import { ArrowUpRight, ArrowDown, Menu, X, Star, Compass, Code2, Mail, Crosshair } from 'lucide-react';
 import data from '@/data/portfolio.json';
-import StudioHero from '@/components/sections/StudioHero';
-import SelectedWork from '@/components/sections/SelectedWork';
-
-gsap.registerPlugin(ScrollTrigger);
-
 
 export default function Home() {
-  const root = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openService, setOpenService] = useState<string | null>('1');
-  useEffect(() => { ScrollTrigger.refresh(); }, [openService]);
-  useEffect(() => {
-    const media = gsap.matchMedia();
-    media.add('(prefers-reduced-motion: no-preference)', () => {
-      const ctx = gsap.context(() => {
-        gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach(el => gsap.from(el, { y: 42, opacity: 0, duration: .85, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } }));
-        gsap.utils.toArray<HTMLElement>('.statement-word').forEach((el, i) => gsap.fromTo(el, { opacity: .18 }, { opacity: 1, scrollTrigger: { trigger: '.about-statement', start: `top ${85 - i * 1.6}%`, end: `top ${65 - i * 1.6}%`, scrub: true } }));
-
-        gsap.fromTo('.contact-title', { y: 70, rotationX: 18, opacity: .2 }, {
-          y: 0, rotationX: 0, opacity: 1, ease: 'none',
-          scrollTrigger: { trigger: '.contact', start: 'top 90%', end: 'top 30%', scrub: .8 },
-        });
-        gsap.utils.toArray<HTMLElement>('.process-number').forEach(number => {
-          gsap.fromTo(number, { borderColor: 'transparent', x: -15 }, {
-            borderColor: '#173a2e40', x: 0, ease: 'none',
-            scrollTrigger: { trigger: number, start: 'top 90%', end: 'top 60%', scrub: .6 },
-          });
-        });
-        gsap.fromTo('.toolbox .tags span', { y: 20, opacity: .2 }, {
-          y: 0, opacity: 1, stagger: .04,
-          scrollTrigger: { trigger: '.toolbox', start: 'top 90%', end: 'bottom 80%', scrub: .5 },
-        });
-        gsap.to('.ticker-track', { xPercent: -25, ease: 'none', scrollTrigger: { trigger: '.ticker', start: 'top bottom', end: 'bottom top', scrub: 1 } });
-        gsap.to('.page-progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
-      }, root);
-      return () => ctx.revert();
-    });
-    return () => media.revert();
-  }, []);
-
-  return <div ref={root} className="portfolio">
-    <div className="page-progress" />
-    <header className="site-header"><a href="#home" className="wordmark" aria-label="Praveen Prasad home">pp<span>®</span></a><nav aria-label="Main navigation" className={menuOpen ? 'nav-links is-open' : 'nav-links'}>{[['Work', 'work'], ['About', 'about'], ['Expertise', 'expertise']].map(([label, id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><a className="header-contact" href="#contact">Start a conversation <ArrowUpRight size={16} /></a><button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button></header>
+  const [category, setCategory] = useState('All');
+  const skills = data.skills.filter(s => category === 'All' || s.category === category);
+  return <div id="home" className="frontier">
+    <header className="masthead"><a className="brand" href="#home">PP<span>★</span></a><nav aria-label="Main navigation" className={menuOpen ? 'navigation open' : 'navigation'}>{[['The story','about'],['Selected work','work'],['The arsenal','skills']].map(([label,id]) => <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav><a className="header-cta" href="#contact">LET’S TALK <ArrowUpRight size={15}/></a><button className="menu-toggle" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button></header>
     <main id="main">
-      <StudioHero />
-      <div className="ticker" aria-hidden="true"><div className="ticker-track">{[0,1,2,3].map(i => <span key={i}>THOUGHTFUL INTERFACES <b>✳</b> DEPENDABLE SYSTEMS <b>✳</b> ROOM TO GROW <b>✳</b></span>)}</div></div>
-      <SelectedWork />
-      <section id="about" className="about section-pad"><span className="micro section-index">02 / A BIT ABOUT ME</span><div className="about-layout"><div className="about-mark" aria-hidden="true">✳<span>LEARN IT.<br />BUILD IT. REFINE IT.</span></div><div><h2 className="about-statement">{'I connect what people need with what technology can do.'.split(' ').map((word, i) => <span className="statement-word" key={i}>{word} </span>)}</h2><div className="about-copy" data-reveal><p>I’m Praveen Prasad, a full-stack developer from Malappuram, Kerala. I work across interfaces, backend features, and automation to turn a useful idea into something people can actually use.</p><p>My path has been shaped by hands-on learning: picking up a new tool, asking better questions, and staying with a problem until it makes sense. I bring that same curiosity to every project and team.</p></div><a className="text-link" href={data.about.socials[0].url} target="_blank" rel="noreferrer">Follow my journey <ArrowUpRight size={18} /></a></div></div><div className="experience"><span className="micro">WHERE I’VE BEEN BUILDING</span><div>{data.experiences.map(e => <article key={e.id} data-reveal><div><h3>{e.title}</h3><p>{e.company}</p><p className="experience-description">{e.description}</p></div><span className="micro">{e.period}</span></article>)}</div></div></section>
-      <section id="expertise" className="expertise section-pad"><div className="expertise-intro" data-reveal><span className="micro section-index">03 / HOW I CAN HELP</span><h2>One idea.<br /><em>All the way</em><br />to the<br /><em>real world.</em></h2><p>The frontend, the backend, and the connections<br />that make the whole thing work.</p></div><div className="services">{data.services.map((s, i) => <div className="service" key={s.id}><button aria-expanded={openService === s.id} aria-controls={`service-${s.id}`} onClick={() => setOpenService(openService === s.id ? null : s.id)}><span className="micro">0{i + 1}</span><h3>{s.title}</h3>{openService === s.id ? <Minus size={20} /> : <Plus size={20} />}</button><div id={`service-${s.id}`} className="service-body" hidden={openService !== s.id}><p>{s.description}</p></div></div>)}<div className="toolbox"><span className="micro">MY EVERYDAY TOOLKIT</span><div className="tags">{data.skills.map(s => <span key={s.id}>{s.name}</span>)}</div></div></div></section>
-      <section className="process section-pad"><span className="micro section-index">04 / A CLEAR WAY FORWARD</span><div className="process-grid">{[
-        ['01', 'Find the right problem.', 'We start with the people using the product, the goal it needs to meet, and the constraints that matter. A clear brief makes the next decisions easier.'],
-        ['02', 'Make it tangible.', 'I turn the direction into working interfaces and connected features, sharing progress early so we can test ideas and refine the details together.'],
-        ['03', 'Finish with care.', 'Responsive layouts, accessible interactions, and maintainable code are part of the delivery. The result should make sense to its users and its next developer.'],
-      ].map(([number, title, description]) => <article key={number} data-reveal><span className="process-number">{number}</span><h3>{title}</h3><p>{description}</p></article>)}</div></section>
-      <section id="contact" className="contact section-pad"><div className="contact-top"><span className="micro">YOUR NEXT CHAPTER STARTS HERE</span><span className="availability"><i /> Open to a good conversation</span></div><a className="contact-title" href={`mailto:${data.about.email}`}><span>Your idea.<br /><em>Our next project.</em></span><ArrowUpRight /></a><div className="contact-bottom"><a className="text-link" href={`mailto:${data.about.email}`}>{data.about.email} <ArrowUpRight size={18} /></a><p>Tell me what you’re thinking. We’ll take it from there.</p></div></section>
-    </main><footer className="site-footer"><a href="#home" className="wordmark">pp<span>®</span></a><span>© {new Date().getFullYear()} Praveen Prasad</span><div>{data.about.socials.map(s => <a href={s.url} key={s.id} target="_blank" rel="noreferrer">{s.platform} <ArrowUpRight size={13} /></a>)}</div><a href="#home" className="back-top" aria-label="Back to top"><ArrowUp size={20} /></a></footer>
+      <section className="hero"><div className="hero-art" role="img" aria-label="Western outlaw and horseback riders against a crimson frontier sunset"/><div className="hero-content"><div className="eyebrow"><span/> INDEPENDENT DEVELOPER. UNTAMED CURIOSITY.</div><h1>PRAVEEN<br/>PRASAD</h1><div className="hero-rule"/><h2>GOOD CODE.<br/>NO SHORTCUTS.</h2><p>Full-stack developer out of Kerala, India.<br/>Building dependable digital experiences<br/>for people with a little ambition.</p><a href="#work" className="button">RIDE THROUGH MY WORK <ArrowUpRight size={17}/></a></div><div className="hero-side">A DEVELOPER’S TALE — EST. 2023</div><div className="hero-bottom"><span><i/> AVAILABLE FOR THE NEXT CHAPTER</span><a href="#work">SCROLL TO EXPLORE <ArrowDown size={14}/></a><span>11.05° N &nbsp; 76.07° E</span></div></section>
+      <div className="manifesto"><span>DESIGN WITH INTENT.</span><Star/><span>BUILD WITH GRIT.</span><Star/><span>LEAVE A MARK.</span></div>
+      <section id="work" className="section work"><div className="section-heading"><div><div className="eyebrow">CHAPTER I / PROOF OF WORK</div><h2>A FEW <span>GOOD BUILDS.</span></h2></div><p>Every project has a story.<br/>These are a few worth telling.</p></div><div className="projects">{data.projects.map((p,i) => <a href={p.link} target="_blank" rel="noreferrer" key={p.id} className="wanted"><div className="poster-top"><span>SELECTED WORK</span><span>NO. 00{i+1}</span></div><h3>{['BUILT TO SELL','BUILT TO TEACH','BUILT TO CONNECT'][i]}</h3><div className={`project-illustration scene-${i}`}><span className="poster-sun"/><div className="mountains"/><div className="project-emblem">{i === 0 ? <Star/> : i === 1 ? <Code2/> : <Compass/>}</div><span className="poster-caption">{['COMMERCE & POSSIBILITY','KNOWLEDGE WITHOUT LIMITS','OPPORTUNITY BEYOND BORDERS'][i]}</span></div><div className="poster-body"><h4>{p.title}</h4><p>{p.description}</p><div className="tags">{p.technologies.slice(0,3).map(t => <span key={t}>{t}</span>)}</div><div className="poster-link">EXPLORE THE PROJECT <ArrowUpRight size={17}/></div></div></a>)}</div><div className="work-footnote"><span>BUILT WITH PURPOSE. SHIPPED WITH PRIDE.</span><span>★ ★ ★</span></div></section>
+      <section id="about" className="section story"><div className="story-title"><div className="eyebrow">CHAPTER II / THE MAN BEHIND THE WORK</div><h2>A BUILDER.<br/>A THINKER.<br/><span>STILL RIDING.</span></h2><div className="story-stamp"><Star/><span>BASED IN KERALA<br/><b>BUILDING EVERYWHERE</b></span></div></div><div className="story-copy"><p className="lead">The best work comes from curiosity, a steady hand, and seeing things through.</p><p>{data.about.bio}</p><p>I learn by doing. Pick up a new tool, ask the difficult question, and stay with the problem until the pieces fit. That’s how I approach every project and every team.</p><a className="text-link" href={data.about.socials[0].url} target="_blank" rel="noreferrer">MORE OF MY STORY <ArrowUpRight size={16}/></a><div className="experience">{data.experiences.map(e => <article key={e.id}><span className="timeline-dot"/><small>{e.period}</small><h3>{e.title}</h3><p>{e.company}</p><p>{e.description}</p></article>)}</div></div></section>
+      <section id="skills" className="section arsenal"><div className="section-heading"><div><div className="eyebrow">CHAPTER III / TOOLS OF THE TRADE</div><h2>THE <span>ARSENAL.</span></h2></div><p>Well-chosen tools. Well-earned experience.<br/>Everything the next job calls for.</p></div><div className="filters" aria-label="Filter skills">{['All','Frontend','Backend','Tools'].map(c => <button key={c} className={category === c ? 'active' : ''} aria-pressed={category === c} onClick={() => setCategory(c)}>{c === 'All' ? 'ALL EQUIPMENT' : c.toUpperCase()}</button>)}<span>{skills.length} IN THE KIT</span></div><div className="skill-grid">{skills.map((s,i) => <div className="skill" key={s.id}><span className="skill-index">{String(i+1).padStart(2,'0')}</span><h3>{s.name}</h3><small>{s.category}</small><Crosshair size={17}/></div>)}</div></section>
+      <section className="section services"><div className="section-heading"><div><div className="eyebrow">CHAPTER IV / WHAT I BRING TO THE TABLE</div><h2>CONSIDER IT <span>HANDLED.</span></h2></div></div><div className="service-grid">{data.services.map((s,i) => <details key={s.id}><summary><span>0{i+1}</span><h3>{s.title}</h3><b>+</b></summary><p>{s.description}</p></details>)}</div></section>
+      <section id="contact" className="section contact"><div className="eyebrow">THERE’S ALWAYS ANOTHER GOOD STORY.</div><h2>LET’S MAKE<br/><span>THE NEXT ONE.</span></h2><p>Got an idea worth chasing? I’m all ears.</p><a className="button light" href={`mailto:${data.about.email}`}>SEND A MESSAGE <Mail size={16}/></a><a className="email" href={`mailto:${data.about.email}`}>{data.about.email}</a><Star className="contact-star"/></section>
+    </main><footer><a className="brand" href="#home">PP<span>★</span></a><span>© {new Date().getFullYear()} PRAVEEN PRASAD</span><div>{data.about.socials.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer">{s.platform}<ArrowUpRight size={12}/></a>)}</div><a className="back-top" href="#home">BACK TO TOP ↑</a><p>Red Dead Redemption 2-inspired personal portfolio. Not affiliated with Rockstar Games.</p></footer>
   </div>;
 }
+
