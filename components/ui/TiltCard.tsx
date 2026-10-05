@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type HTMLAttributes,
   type ReactNode,
 } from 'react';
 import { cn } from '@/lib/cn';
@@ -13,11 +14,13 @@ export default function TiltCard({
   children,
   className,
   maxTilt = 7,
+  ...rest
 }: {
   children: ReactNode;
   className?: string;
   maxTilt?: number;
-}) {
+  'data-reveal'?: boolean;
+} & HTMLAttributes<HTMLDivElement>) {
   const ref = useRef<HTMLDivElement>(null);
   const [style, setStyle] = useState<CSSProperties>({});
 
@@ -63,6 +66,7 @@ export default function TiltCard({
       ref={ref}
       className={cn('will-change-transform', className)}
       style={style}
+      {...rest}
     >
       {children}
     </div>

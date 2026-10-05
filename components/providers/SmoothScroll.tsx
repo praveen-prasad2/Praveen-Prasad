@@ -28,7 +28,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         });
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add(tick);
+        if (document.documentElement.classList.contains('is-loading')) lenis.stop();
       }
+      ScrollTrigger.refresh();
+    };
+    const onReady = () => {
+      lenis?.start();
       ScrollTrigger.refresh();
     };
 
@@ -50,7 +55,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         if (original === null) destination.removeAttribute('tabindex');
       };
       if (lenis) {
-        lenis.scrollTo(destination, { offset: destination.classList.contains('work-chapter') ? -96 : -24, onComplete: focusDestination });
+        lenis.scrollTo(destination, { offset: 0, onComplete: focusDestination });
       } else {
         destination.scrollIntoView({ behavior: preference.matches ? 'instant' : 'smooth', block: 'start' });
         focusDestination();
@@ -61,6 +66,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     preference.addEventListener('change', configure);
     pointer.addEventListener('change', configure);
     document.addEventListener('click', onAnchorClick);
+    window.addEventListener('site:ready', onReady);
     document.fonts?.ready.then(() => { if (active) ScrollTrigger.refresh(); }).catch(() => {});
 
     return () => {
@@ -68,6 +74,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       preference.removeEventListener('change', configure);
       pointer.removeEventListener('change', configure);
       document.removeEventListener('click', onAnchorClick);
+      window.removeEventListener('site:ready', onReady);
       gsap.ticker.remove(tick);
       lenis?.destroy();
     };

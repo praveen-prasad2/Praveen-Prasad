@@ -1,20 +1,32 @@
-import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Bricolage_Grotesque, Inter_Tight, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 
 import './globals.css'
 
-
-
-const inter = Inter({
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  axes: ['wdth', 'opsz'],
+  adjustFontFallback: false,
+  variable: '--font-display',
+})
+
+const sans = Inter_Tight({
+  subsets: ['latin'],
   variable: '--font-sans',
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const serif = Instrument_Serif({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  adjustFontFallback: false,
+})
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
   variable: '--font-mono',
 })
 
@@ -29,6 +41,10 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  themeColor: '#0c0c0b',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -37,13 +53,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      data-theme="dark"
+      className={`${display.variable} ${sans.variable} ${serif.variable} ${mono.variable}`}
     >
-      <body className="min-h-screen bg-bg font-sans text-ink antialiased">
-        <a
-          href="#main"
-          className="fixed left-4 top-4 z-[999] -translate-y-24 rounded-full bg-accent px-4 py-2 text-sm font-medium text-white transition-transform focus-visible:translate-y-0"
-        >
+      <body>
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
 
@@ -52,6 +66,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-

@@ -259,37 +259,36 @@
     },
     {
       "id": "3",
-      "title": "Rheinland Consultancy",
-      "description": "A web platform connecting candidates in India with overseas career opportunities through a Germany-based consultancy.",
+      "title": "Zenith Drugstore",
+      "description": "A B2B platform for UAE's trusted surgical and hospital-supplies distributor, built to showcase products and build trust with clinics and hospitals.",
       "technologies": [
         "Next.js",
         "TypeScript",
-        "Tailwind CSS",
-        "MongoDB"
+        "Tailwind CSS"
       ],
-      "link": "https://rheinlandconsultancy.com/"
+      "link": "https://www.zenithdrugstore.com/"
     }
   ],
   "testimonials": [
     {
       "id": "1",
-      "name": "Aisha Rahman",
+      "name": "Hadi Razal",
       "role": "Founder",
-      "company": "Product Share",
+      "company": "Productshare",
       "quote": "Praveen translated a rough idea into a shipping SaaS product. Clean architecture, sharp UI, and zero hand-holding required."
     },
     {
       "id": "2",
-      "name": "Rahul Menon",
-      "role": "CTO",
-      "company": "Beegains",
+      "name": "Jibin Jose",
+      "role": "Manager",
+      "company": "Aquanexx Marine",
       "quote": "Reliable engineer who thinks beyond tickets. He improved performance, ownership, and product polish on every project."
     },
     {
       "id": "3",
-      "name": "Sophie Keller",
-      "role": "Managing Director",
-      "company": "Rheinland Consultancy",
+      "name": "Paul Gopurathingal",
+      "role": "Founder",
+      "company": "Rheinland",
       "quote": "Professional, responsive, and design-aware. Our platform feels modern and trustworthy — exactly what we needed."
     }
   ]
