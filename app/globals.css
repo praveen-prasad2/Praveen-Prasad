@@ -321,6 +321,78 @@ html.cursor-visible .cursor-ring[data-state='label'] + .cursor-dot { opacity: 0;
 .vm-star { width: .38em; height: .38em; fill: var(--accent); }
 .vm-item.is-serif .vm-star { fill: var(--fg); }
 
+/* ---------- Ventures ---------- */
+.ventures-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); margin: 0; padding: 0; list-style: none; }
+.venture {
+  position: relative; display: flex; flex-direction: column; gap: 22px;
+  padding: clamp(18px, 1.8vw, 26px); border: 1px solid var(--line); border-radius: 26px; background: var(--surface);
+  transition: transform .8s var(--ease-out), border-color .5s, box-shadow .8s var(--ease-out);
+}
+.venture:hover, .venture:focus-within {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--v) 60%, transparent);
+  box-shadow: 0 50px 90px -50px color-mix(in srgb, var(--v) 55%, transparent);
+}
+.venture-top { display: flex; align-items: center; gap: 12px; }
+.venture-role, .venture-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; }
+.venture-role { border: 1px solid var(--line); }
+.venture-role i { width: 6px; height: 6px; border-radius: 50%; background: var(--v); box-shadow: 0 0 10px var(--v); }
+.venture-badge { background: var(--fg); color: var(--bg); }
+.venture-index { margin-left: auto; color: var(--muted); }
+
+.venture-visual {
+  position: relative; isolation: isolate; display: grid; place-items: center;
+  aspect-ratio: 4 / 3; overflow: hidden; border-radius: 18px;
+  background:
+    radial-gradient(90% 80% at 25% 15%, color-mix(in srgb, var(--v) 48%, transparent), transparent 62%),
+    radial-gradient(80% 70% at 95% 100%, color-mix(in srgb, var(--v) 22%, transparent), transparent 60%),
+    var(--surface-2);
+}
+.venture-visual::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background-image: radial-gradient(circle, rgba(238, 235, 227, .16) 1px, transparent 1.4px);
+  background-size: 16px 16px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 15%, transparent 72%);
+  mask-image: radial-gradient(ellipse at center, #000 15%, transparent 72%);
+  transition: transform 1.4s var(--ease-out);
+}
+.venture:hover .venture-visual::before { transform: scale(1.15); }
+.venture-name {
+  position: relative; z-index: 1; padding: 0 18px; text-align: center;
+  font-family: var(--font-display), sans-serif; font-size: clamp(30px, 2.9vw, 46px); font-weight: 500;
+  line-height: .95; letter-spacing: -.045em; font-variation-settings: 'wdth' 88;
+  transition: transform .9s var(--ease-out), letter-spacing .9s var(--ease-out);
+}
+.venture:hover .venture-name { transform: scale(1.05); letter-spacing: -.035em; }
+
+.venture-body { display: flex; flex: 1; flex-direction: column; gap: 10px; }
+.venture-tagline { font-family: var(--font-serif), serif; font-size: clamp(20px, 1.7vw, 25px); font-style: italic; line-height: 1.15; color: var(--accent); }
+.venture-desc { color: var(--muted); font-size: 16px; line-height: 1.6; }
+
+.venture-cta { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 500; }
+.venture-cta-icon { display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--v); color: #fff; transition: transform .7s var(--ease-out); }
+.is-productshare .venture-cta-icon { color: var(--ink); }
+.venture-cta:hover .venture-cta-icon, .venture-cta:focus-visible .venture-cta-icon { transform: rotate(45deg); }
+
+.is-orbit .venture-visual {
+  place-items: end start; padding: 18px 22px;
+  background: radial-gradient(70% 70% at 50% 45%, rgba(238, 235, 227, .1), transparent 70%), var(--surface-2);
+}
+.is-orbit .venture-name { padding: 0; text-align: left; }
+.orbit-svg { position: absolute; inset: 6% 0 0; width: 100%; height: 88%; z-index: 0; overflow: visible; }
+.orbit-svg ellipse { fill: none; stroke: rgba(238, 235, 227, .22); stroke-width: .6; transition: stroke .6s; }
+.orbit-ring-c ellipse { stroke-dasharray: 2 4; }
+.venture:hover .orbit-svg ellipse { stroke: rgba(238, 235, 227, .42); }
+.orbit-core { fill: var(--accent); filter: drop-shadow(0 0 8px rgba(255, 91, 34, .8)); }
+.orbit-moon { fill: var(--accent); }
+.orbit-ring-b .orbit-moon { fill: var(--fg); }
+.orbit-ring { transform-box: view-box; transform-origin: 100px 100px; }
+.orbit-ring-a { animation: orbit-a 16s linear infinite; }
+.orbit-ring-b { animation: orbit-b 24s linear infinite; }
+.orbit-ring-c { animation: orbit-b 60s linear infinite reverse; }
+@keyframes orbit-a { from { transform: rotate(-20deg); } to { transform: rotate(340deg); } }
+@keyframes orbit-b { to { transform: rotate(360deg); } }
+
 /* ---------- About ---------- */
 .manifesto {
   max-width: 1280px; margin: clamp(48px, 7vw, 96px) 0 clamp(80px, 11vw, 160px);
@@ -477,6 +549,7 @@ html.cursor-visible .cursor-ring[data-state='label'] + .cursor-dot { opacity: 0;
   .section-heading { flex-direction: column; align-items: flex-start; gap: 24px; }
   .section-kicker { flex-wrap: wrap; }
 
+  .ventures-grid { grid-template-columns: 1fr; }
   .about-grid, .services-grid { grid-template-columns: 1fr; }
   .service-intro { position: static; }
   .service-panel p { padding-left: 14px; }

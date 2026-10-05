@@ -42,7 +42,7 @@ export default function Services() {
         <div className="service-intro">
           <span className="section-kicker micro" data-kicker>
             <span>
-              <b>02</b> — What I bring
+              <b>03</b> — What I bring
             </span>
           </span>
           <h2 data-split>

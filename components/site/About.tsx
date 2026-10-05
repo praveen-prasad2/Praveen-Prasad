@@ -68,7 +68,7 @@ export default function About() {
     <section ref={root} id="about" className="about section" data-theme="light">
       <div className="section-kicker micro" data-kicker>
         <span>
-          <b>01</b> — About
+          <b>02</b> — About
         </span>
         <span>A little about me</span>
       </div>

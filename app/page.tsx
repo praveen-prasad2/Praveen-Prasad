@@ -7,6 +7,7 @@ import Preloader from '@/components/site/Preloader';
 import Header from '@/components/site/Header';
 import Cursor from '@/components/site/Cursor';
 import Hero from '@/components/site/Hero';
+import Ventures from '@/components/site/Ventures';
 import About from '@/components/site/About';
 import Services from '@/components/site/Services';
 import Testimonials from '@/components/site/Testimonials';
@@ -55,6 +56,7 @@ export default function Home() {
       <Header />
       <main id="main" className="site-main">
         <Hero ready={ready} />
+        <Ventures />
         <About />
         <Services />
         <Testimonials />

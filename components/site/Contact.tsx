@@ -91,7 +91,7 @@ export default function Contact() {
     <section ref={root} id="contact" className="contact section" data-theme="accent">
       <div className="section-kicker micro" data-kicker>
         <span>
-          <b>04</b> — Let&rsquo;s make something
+          <b>05</b> — Let&rsquo;s make something
         </span>
         <span>Every good thing starts with a hello</span>
       </div>

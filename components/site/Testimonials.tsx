@@ -78,7 +78,7 @@ export default function Testimonials() {
     <section ref={root} id="testimonials" className="testimonials section" data-theme="dark">
       <div className="section-kicker micro" data-kicker>
         <span>
-          <b>03</b> — Kind words
+          <b>04</b> — Kind words
         </span>
         <span>What people say</span>
       </div>
