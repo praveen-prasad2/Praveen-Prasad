@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-/** Dot + trailing ring. Grows over links, shows a label over anything with `data-cursor`. */
+/** Dot + trailing ring. Grows over links, shows a label over anything with `data-cursor`, hides over `data-cursor-native`. */
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -41,9 +41,12 @@ export default function Cursor() {
 
     const onOver = (e: MouseEvent) => {
       const target = e.target instanceof Element ? e.target : null;
+      const native = target?.closest('[data-cursor-native]');
       const labelled = target?.closest<HTMLElement>('[data-cursor]');
       const interactive = target?.closest('a, button, summary, [role="button"]');
-      if (labelled) {
+      if (native) {
+        ring.dataset.state = 'native';
+      } else if (labelled) {
         label.textContent = labelled.dataset.cursor ?? '';
         ring.dataset.state = 'label';
       } else if (interactive) {

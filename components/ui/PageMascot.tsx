@@ -5,7 +5,7 @@ import { Mascot } from 'page-mascot'
 
 const DRAG_THRESHOLD = 4
 
-/** Fox that follows the cursor. Starts at the bottom centre and can be dragged anywhere. */
+/** Fox that follows the cursor. Starts bottom-right on phones, bottom centre on desktop, and can be dragged anywhere. */
 export default function PageMascot() {
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   const [dragging, setDragging] = useState(false)
@@ -78,10 +78,12 @@ export default function PageMascot() {
 
   return (
     <div
-      className={`fixed bottom-4 left-1/2 z-[100] touch-none select-none md:bottom-6 ${
-        dragging ? 'cursor-grabbing' : 'cursor-grab'
+      // Phones: bottom-right corner. Desktop: bottom centre. The drag offset rides on top of either.
+      className={`fixed bottom-4 right-4 z-[100] touch-none select-none [transform:translate(var(--dx),var(--dy))] md:bottom-6 md:left-1/2 md:right-auto md:[transform:translate(calc(-50%_+_var(--dx)),var(--dy))] mascot-zone ${
+        dragging ? 'is-dragging' : ''
       }`}
-      style={{ transform: `translate(calc(-50% + ${offset.x}px), ${offset.y}px)` }}
+      data-cursor-native
+      style={{ '--dx': `${offset.x}px`, '--dy': `${offset.y}px` } as React.CSSProperties}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -93,7 +95,8 @@ export default function PageMascot() {
         reactions="/mascots/fox-reactions.webp"
         size={220}
         label="fox mascot"
-        className="!cursor-[inherit]"
+        // The sprite cells scale with the box, so CSS can shrink it on phones without a flash.
+        className="max-md:!h-[160px] max-md:!w-[160px]"
       />
     </div>
   )

@@ -227,6 +227,10 @@ html.cursor-visible .cursor-dot, html.cursor-visible .cursor-ring { opacity: 1; 
 }
 .cursor-ring[data-state='label'] .cursor-label { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 html.cursor-visible .cursor-ring[data-state='label'] + .cursor-dot { opacity: 0; }
+/* Elements marked data-cursor-native (the mascot) swap the custom cursor for their own. */
+html.cursor-visible .cursor-ring[data-state='native'], html.cursor-visible .cursor-ring[data-state='native'] + .cursor-dot { opacity: 0; }
+:root .mascot-zone, :root .mascot-zone * { cursor: url('/cursors/paw.svg') 16 16, grab !important; }
+:root .mascot-zone:active, :root .mascot-zone:active *, :root .mascot-zone.is-dragging, :root .mascot-zone.is-dragging * { cursor: url('/cursors/paw-down.svg') 16 16, grabbing !important; }
 
 .preloader { position: fixed; inset: 0; z-index: 300; animation: preloader-fallback 0s 5s forwards; }
 @keyframes preloader-fallback { to { visibility: hidden; opacity: 0; } }
@@ -394,6 +398,8 @@ html.cursor-visible .cursor-ring[data-state='label'] + .cursor-dot { opacity: 0;
 @keyframes orbit-b { to { transform: rotate(360deg); } }
 
 /* ---------- About ---------- */
+/* Entrance animations start the timeline text and skill chips off to the side; clip so they never widen the page on phones. */
+.about { overflow-x: clip; }
 .manifesto {
   max-width: 1280px; margin: clamp(48px, 7vw, 96px) 0 clamp(80px, 11vw, 160px);
   font-family: var(--font-display), sans-serif; font-size: clamp(38px, 5.8vw, 100px); font-weight: 500;
