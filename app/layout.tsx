@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Bricolage_Grotesque, Inter_Tight, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import SmoothScroll from '@/components/providers/SmoothScroll'
+import PageMascot from '@/components/ui/PageMascot'
 
 import './globals.css'
 
@@ -62,6 +63,8 @@ export default function RootLayout({
         </a>
 
         <SmoothScroll>{children}</SmoothScroll>
+
+        <PageMascot />
       </body>
     </html>
   )
