@@ -75,7 +75,7 @@ export default function About() {
 
       <p className="manifesto">
         <Split
-          text="Good digital experiences start with curiosity, and come to life through care."
+          text="Good websites and apps start with curiosity, and come to life through care."
           by="words"
           accent={['curiosity', 'care']}
         />
@@ -83,11 +83,11 @@ export default function About() {
 
       <div className="about-grid">
         <div className="about-copy" data-fade>
-          <h3>
-            A developer. A problem solver.
+          <h2>
+            A full stack developer in Kerala.
             <br />
-            Always a work in progress.
-          </h3>
+            Hands-on, from interface to API.
+          </h2>
           <p>{data.about.bio}</p>
           <a className="text-link has-roll" href={data.about.socials[1].url} target="_blank" rel="noreferrer">
             <span>More on GitHub</span> <ArrowUpRight size={15} />
@@ -103,8 +103,9 @@ export default function About() {
               <span className="tl-dot" aria-hidden="true" />
               <div className="tl-text">
                 <span className="micro">{e.period}</span>
-                <h4>{e.title}</h4>
+                <h3>{e.title}</h3>
                 <p>{e.company.split(',')[0]}</p>
+                <p className="tl-desc">{e.description}</p>
               </div>
             </li>
           ))}
@@ -113,7 +114,7 @@ export default function About() {
 
       <div className="toolbox">
         <span className="micro muted" data-fade>
-          A few tools of the trade
+          Tools I work with
         </span>
         <ul className="skill-cloud">
           {data.skills.map((s) => (

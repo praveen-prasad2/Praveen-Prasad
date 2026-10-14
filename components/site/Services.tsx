@@ -42,7 +42,7 @@ export default function Services() {
         <div className="service-intro">
           <span className="section-kicker micro" data-kicker>
             <span>
-              <b>03</b> — What I bring
+              <b>03</b> — Services
             </span>
           </span>
           <h2 data-split>
@@ -53,7 +53,10 @@ export default function Services() {
               <Split text="final detail." by="words" />
             </em>
           </h2>
-          <p data-fade>The creative thinking and technical care to get your next thing into the world.</p>
+          <p data-fade>
+            Frontend and backend development for businesses and teams across India, whether you need a custom web application, a
+            website your team can update, or the workflows that connect them.
+          </p>
         </div>
 
         <ul className="service-list">

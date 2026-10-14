@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { gsap } from 'gsap';
 import MagneticButton from '@/components/ui/MagneticButton';
 import HeroField from './HeroField';
@@ -21,7 +21,7 @@ function yearsOfExperience(experiences: { period: string }[]) {
 const stats: [number, string][] = [
   [yearsOfExperience(data.experiences), 'Years experience'],
   [data.projects.length, 'Projects shipped'],
-  [data.skills.length, 'Tools mastered'],
+  [data.skills.length, 'Tools I work with'],
 ];
 
 export default function Hero({ ready }: { ready: boolean }) {
@@ -119,19 +119,16 @@ export default function Hero({ ready }: { ready: boolean }) {
         </div>
 
         <h1 className="hero-title" id="hero-title">
-          <span className="sr-only">Thoughtful code. Real impact.</span>
+          <span className="sr-only">Full Stack Developer in India</span>
           <span className="ht-line l1" aria-hidden="true">
-            <Split text="Thoughtful" decorative />
+            <Split text="Full Stack" decorative />
           </span>
           <span className="ht-line l2" aria-hidden="true">
-            <Split text="code." decorative />{' '}
-            <em>
-              <Split text="Real" decorative />
-            </em>
+            <Split text="Developer" decorative />
           </span>
           <span className="ht-line l3" aria-hidden="true">
             <em>
-              <Split text="impact." decorative />
+              <Split text="in India." decorative />
             </em>
             <svg viewBox="0 0 24 24" className="ht-star">
               <path d={STAR_PATH} />
@@ -142,12 +139,17 @@ export default function Hero({ ready }: { ready: boolean }) {
         <div className="hero-bottom">
           <div className="hero-intro hero-reveal">
             <p className="hero-sub">
-              I&rsquo;m {data.about.name}, a {data.about.title.toLowerCase()}. I turn complex ideas into simple, considered digital
-              experiences.
+              I&rsquo;m <strong>{data.about.name}</strong>, a {data.about.title.toLowerCase()} based in Kerala, India. I build
+              websites and web applications with React, Next.js, and Node.js, connecting thoughtful interfaces with practical
+              backend functionality.
             </p>
             <div className="hero-ctas">
-              <MagneticButton as="a" href={`mailto:${data.about.email}`} className="btn btn-primary has-roll">
-                <RollText>{'Let’s talk'}</RollText>
+              <MagneticButton as="a" href="#ventures" className="btn btn-primary has-roll">
+                <RollText>Explore My Work</RollText>
+                <ArrowDown size={16} />
+              </MagneticButton>
+              <MagneticButton as="a" href={`mailto:${data.about.email}`} className="btn btn-ghost has-roll">
+                <RollText>Discuss a Project</RollText>
                 <ArrowUpRight size={16} />
               </MagneticButton>
             </div>

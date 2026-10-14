@@ -2,7 +2,7 @@
   "about": {
     "name": "Praveen Prasad",
     "title": "Full Stack Developer",
-    "bio": "Full-stack developer based in Malappuram, Kerala. I build considered interfaces, connected web applications, and practical automations with React, Next.js, TypeScript, Node.js, and n8n. My approach is hands-on: understand the problem, make it work, and refine the details.",
+    "bio": "I’m a full stack developer based in Malappuram, Kerala. I build websites, web applications, and workflow automations with React, Next.js, TypeScript, Node.js, and n8n, from the interface people use to the APIs and integrations behind it. I started out at Chimera in Trivandrum building responsive websites and application features, and today I build web applications at Beegains Technology Solutions. My approach is hands-on: understand the problem, get a working version in front of people, then refine the details.",
     "email": "praveenprasad2510@gmail.com",
     "location": "Malappuram,Kerala",
     "avatar": "",
@@ -171,7 +171,7 @@
       "title": "Senior Frontend Developer",
       "company": "Beegains Technology Solutions LLP,Malappuram",
       "period": "Oct 2024 - Present",
-      "description": "Building web applications with Next.js and TypeScript, contributing full-stack features, and connecting workflows with n8n. I learned new tools as the work required and applied them to practical product needs.",
+      "description": "I build web applications with Next.js and TypeScript, contribute full stack features across the frontend and backend, and connect business workflows with n8n. When the work calls for a new tool, I learn it and apply it to the product need in front of me.",
       "technologies": [
         "Next.js",
         "TypeScript",
@@ -184,7 +184,7 @@
       "title": "Web Developer",
       "company": "Chimera, Trivandrum",
       "period": "June 2023 - Oct 2024",
-      "description": "Developed responsive websites and application features with React, Node.js, and WordPress. Worked across frontend and backend implementation to bring project requirements into usable web experiences.",
+      "description": "I developed responsive websites and application features with React, Node.js, MongoDB, and WordPress, working across frontend and backend implementation to turn project requirements into usable web experiences.",
       "technologies": [
         "React",
         "Node.js",
@@ -197,37 +197,37 @@
     {
       "id": "1",
       "title": "Web applications",
-      "description": "From the first screen to the API behind it: connected applications built with Next.js, React, TypeScript, and Node.js, with a structure that is straightforward to extend.",
+      "description": "Custom web applications built with Next.js, React, TypeScript, and Node.js, from the screens your users work in to the APIs and data behind them. The code is organised so new features can be added without starting over.",
       "icon": "code"
     },
     {
       "id": "2",
       "title": "Interfaces & interaction",
-      "description": "Responsive layouts, purposeful motion, and accessible components. I translate a design into an interface that feels clear and behaves consistently.",
+      "description": "Responsive, accessible interfaces that turn a design into something clear and consistent to use on any screen, with motion only where it helps people understand what is happening.",
       "icon": "palette"
     },
     {
       "id": "3",
       "title": "Content-driven websites",
-      "description": "WordPress themes, plugins, and content sites that give your team a practical way to publish and keep your website current.",
+      "description": "WordPress websites, custom themes, and plugins that let your team publish and update content themselves, without waiting on a developer for every change.",
       "icon": "layout"
     },
     {
       "id": "4",
       "title": "Connected workflows",
-      "description": "n8n automations that move information between APIs, CRMs, and internal tools, reducing the repetitive steps between systems.",
+      "description": "n8n automations that move information between your APIs, CRMs, and internal tools, so the repetitive steps between systems run on their own instead of by hand.",
       "icon": "workflow"
     },
     {
       "id": "5",
       "title": "Online storefronts",
-      "description": "Shopify storefronts and shopping flows that make products easy to explore, with an implementation your business can maintain.",
+      "description": "Shopify storefronts and shopping flows that make your products easy to browse and buy, built so your team can manage the store day to day.",
       "icon": "shopping"
     },
     {
       "id": "6",
       "title": "Technical collaboration",
-      "description": "A second pair of eyes on architecture, code, and implementation decisions, plus hands-on guidance for teams working toward a release.",
+      "description": "A second pair of eyes on architecture, code, and implementation decisions, plus hands-on help for teams working toward a release.",
       "icon": "users"
     }
   ],
@@ -235,7 +235,7 @@
     {
       "id": "1",
       "title": "Product Share",
-      "description": "A SaaS platform that gives small entrepreneurs a straightforward way to create product catalogues and share them with customers.",
+      "description": "A SaaS platform for small businesses and entrepreneurs who need a simple way to show customers what they sell. Sellers build a product catalogue and share it through one link. Built with Next.js and TypeScript, with Razorpay payments and AWS S3 storage.",
       "technologies": [
         "Next.js",
         "TypeScript",
@@ -248,7 +248,7 @@
     {
       "id": "2",
       "title": "Beegains Academy",
-      "description": "A learning-focused website paired with an admin dashboard, bringing a clear public experience and manageable content into one platform.",
+      "description": "A public website for a learning platform, paired with an admin dashboard so the team can manage its content in one place. Built with Next.js, TypeScript, Tailwind CSS, and MongoDB.",
       "technologies": [
         "Next.js",
         "TypeScript",
@@ -260,7 +260,7 @@
     {
       "id": "3",
       "title": "Zenith Drugstore",
-      "description": "A B2B platform for UAE's trusted surgical and hospital-supplies distributor, built to showcase products and build trust with clinics and hospitals.",
+      "description": "A B2B website for a UAE surgical and hospital-supplies distributor, presenting its product range clearly to clinics and hospitals. Built with Next.js, TypeScript, and Tailwind CSS.",
       "technologies": [
         "Next.js",
         "TypeScript",

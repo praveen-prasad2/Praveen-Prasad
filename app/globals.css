@@ -305,6 +305,7 @@ html.cursor-visible .cursor-ring[data-state='native'], html.cursor-visible .curs
 .ht-star { flex-shrink: 0; width: .4em; height: .4em; margin-left: .18em; fill: var(--accent); }
 
 .hero-bottom { display: grid; grid-template-columns: 1.35fr 1fr .85fr; gap: clamp(24px, 4vw, 64px); align-items: end; padding-bottom: clamp(24px, 4vh, 44px); }
+.hero-sub strong { font-weight: 600; color: var(--fg); }
 .hero-sub { max-width: 38ch; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.55; color: color-mix(in srgb, var(--fg) 80%, transparent); }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0; padding-top: 18px; border-top: 1px solid var(--line); }
@@ -408,7 +409,7 @@ html.cursor-visible .cursor-ring[data-state='native'], html.cursor-visible .curs
 .manifesto .is-accent .si { font-family: var(--font-serif), serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; color: var(--accent); font-variation-settings: normal; }
 
 .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(40px, 7vw, 120px); }
-.about-copy h3 { font-family: var(--font-display), sans-serif; font-size: clamp(24px, 2.4vw, 36px); font-weight: 500; line-height: 1.12; letter-spacing: -.03em; }
+.about-copy h2 { font-variation-settings: normal; font-family: var(--font-display), sans-serif; font-size: clamp(24px, 2.4vw, 36px); font-weight: 500; line-height: 1.12; letter-spacing: -.03em; }
 .about-copy p { max-width: 52ch; margin-top: 22px; color: var(--muted); font-size: 17px; line-height: 1.7; }
 .about-copy .text-link { margin-top: 28px; }
 
@@ -420,8 +421,9 @@ html.cursor-visible .cursor-ring[data-state='native'], html.cursor-visible .curs
 .tl-dot { position: absolute; left: -40px; top: 3px; width: 13px; height: 13px; border-radius: 50%; background: var(--bg); border: 1px solid var(--fg); }
 .tl-item:first-child .tl-dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent); }
 .tl-text .micro { color: var(--muted); }
-.tl-text h4 { margin-top: 8px; font-family: var(--font-display), sans-serif; font-size: clamp(22px, 2vw, 30px); font-weight: 500; letter-spacing: -.03em; }
+.tl-text h3 { margin-top: 8px; font-family: var(--font-display), sans-serif; font-size: clamp(22px, 2vw, 30px); font-weight: 500; letter-spacing: -.03em; }
 .tl-text p { margin-top: 4px; color: var(--muted); }
+.tl-text .tl-desc { max-width: 46ch; margin-top: 12px; font-size: 15px; line-height: 1.6; }
 
 .toolbox { margin-top: clamp(80px, 11vw, 150px); }
 .skill-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }

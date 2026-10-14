@@ -83,7 +83,9 @@ export default function Footer() {
         </a>
 
         <div className="footer-bottom">
-          <span className="micro">© {new Date().getFullYear()} Praveen Prasad</span>
+          <span className="micro">
+            © {new Date().getFullYear()} {data.about.name} · Full stack developer in Kerala, India
+          </span>
           <a className="micro" href={`mailto:${data.about.email}`}>
             {data.about.email}
           </a>

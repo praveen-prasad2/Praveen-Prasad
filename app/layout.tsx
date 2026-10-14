@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Bricolage_Grotesque, Inter_Tight, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import SmoothScroll from '@/components/providers/SmoothScroll'
 import PageMascot from '@/components/ui/PageMascot'
+import data from '@/data/portfolio.json'
 
 import './globals.css'
 
@@ -31,15 +32,51 @@ const mono = JetBrains_Mono({
   variable: '--font-mono',
 })
 
+// The apex domain redirects here, so www is the canonical host.
+const SITE_URL = 'https://www.praveenprasad.in'
+const TITLE = 'Praveen Prasad | Full Stack Developer in India'
+const DESCRIPTION =
+  'Praveen Prasad is a full stack developer in India building websites, web apps, and automations with React, Next.js, and Node.js. Explore his work.'
+
 export const metadata: Metadata = {
-  title: 'Praveen Prasad — Full Stack Developer',
-  description:
-    'Praveen Prasad is a full-stack developer in Kerala building thoughtful websites, connected applications, and practical automations with Next.js, React, TypeScript, and n8n.',
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: data.about.name,
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary',
+    title: TITLE,
+    description: DESCRIPTION,
+    creator: '@praveen_prasaad',
+  },
   icons: {
     icon: '/uploads/logo.svg',
     shortcut: '/uploads/logo.svg',
     apple: '/uploads/logo.svg',
   },
+}
+
+// Only details already shown on the page.
+const [city, region] = data.about.location.split(',').map((part) => part.trim())
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: data.about.name,
+  jobTitle: data.about.title,
+  url: SITE_URL,
+  email: `mailto:${data.about.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: city, addressRegion: region, addressCountry: 'IN' },
+  worksFor: { '@type': 'Organization', name: data.experiences[0].company.split(',')[0] },
+  knowsAbout: ['React', 'Next.js', 'TypeScript', 'Node.js', 'n8n', 'WordPress', 'Shopify'],
+  sameAs: data.about.socials.map((s) => s.url),
 }
 
 export const viewport: Viewport = {
@@ -58,6 +95,10 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${serif.variable} ${mono.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <a href="#main" className="skip-link">
           Skip to content
         </a>

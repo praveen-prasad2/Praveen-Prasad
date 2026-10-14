@@ -24,7 +24,7 @@ const ventures: Venture[] = [
     name: 'Duoph Technologies',
     role: 'Co-Founder',
     description:
-      'Helping businesses grow through custom websites, applications, branding, digital marketing, and business automation.',
+      'A company I co-founded to help businesses grow through custom websites, applications, branding, digital marketing, and business automation.',
     cta: { label: 'Explore Duoph', href: 'https://www.duoph.in/' },
     accent: '#18704e',
     kind: 'duoph',
@@ -33,7 +33,8 @@ const ventures: Venture[] = [
     name: 'ProductShare',
     role: 'Founder',
     tagline: 'Your products. One link.',
-    description: 'A simpler way for businesses to share their entire product catalogue through one professional link.',
+    description:
+      'A SaaS platform that lets businesses share their entire product catalogue through one professional link. Built with Next.js, TypeScript, Razorpay, and AWS S3.',
     cta: { label: 'Explore ProductShare', href: 'https://productshare.in/' },
     accent: '#ff5b22',
     kind: 'productshare',
@@ -121,12 +122,12 @@ export default function Ventures() {
           <Split text="From ideas to" by="words" />
           <br />
           <em>
-            <Split text="things that matter." by="words" />
+            <Split text="working products." by="words" />
           </em>
         </h2>
         <p data-fade>
-          Beyond development, I&rsquo;m building businesses and products that help people work smarter and bring their ideas to
-          life.
+          Alongside client and in-house development work, I&rsquo;m building products and businesses of my own, taking ideas
+          from a first sketch to platforms people can use.
         </p>
       </div>
 

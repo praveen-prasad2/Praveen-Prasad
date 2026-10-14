@@ -91,13 +91,15 @@ export default function Contact() {
     <section ref={root} id="contact" className="contact section" data-theme="accent">
       <div className="section-kicker micro" data-kicker>
         <span>
-          <b>05</b> — Let&rsquo;s make something
+          <b>05</b> — Contact
         </span>
-        <span>Every good thing starts with a hello</span>
+        <span>Websites, web apps &amp; automations</span>
       </div>
 
+      <h2 className="sr-only">Contact</h2>
+
       <a className="contact-title" href={`mailto:${data.about.email}`} data-cursor="Say hello">
-        <span className="sr-only">Have an idea? Let&rsquo;s talk.</span>
+        <span className="sr-only">Have an idea? Let&rsquo;s talk. Email {data.about.name}.</span>
         <span className="ct-line pressure" aria-hidden="true">
           <Split text="Have an idea?" decorative />
         </span>
@@ -116,9 +118,9 @@ export default function Contact() {
           <span>{data.about.email}</span> <ArrowUpRight size={15} />
         </a>
         <p>
-          Based in Kerala.
+          Based in Kerala, India.
           <br />
-          Building for everywhere.
+          Tell me about your website, app, or workflow.
         </p>
       </div>
     </section>
